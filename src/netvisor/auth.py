@@ -114,12 +114,13 @@ class NetvisorAuth(AuthBase):
         transaction_id = self.make_transaction_id()
         mac = self.make_mac(r.url, timestamp, transaction_id)
 
-        r.headers['X-Netvisor-Authentication-Sender'] = self.sender
         r.headers['X-Netvisor-Authentication-CustomerId'] = self.customer_id
-        r.headers['X-Netvisor-Interface-Language'] = self.language
-        r.headers['X-Netvisor-Organisation-ID'] = self.organization_id
+        r.headers['X-Netvisor-Authentication-MAC'] = mac
+        r.headers['X-Netvisor-Authentication-PartnerId'] = self.partner_id
+        r.headers['X-Netvisor-Authentication-Sender'] = self.sender
         r.headers['X-Netvisor-Authentication-Timestamp'] = timestamp
         r.headers['X-Netvisor-Authentication-TransactionId'] = transaction_id
-        r.headers['X-Netvisor-Authentication-MAC'] = mac
+        r.headers['X-Netvisor-Interface-Language'] = self.language
+        r.headers['X-Netvisor-Organisation-ID'] = self.organization_id
 
         return r

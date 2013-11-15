@@ -142,6 +142,12 @@ class TestNetvisorAuth(object):
             '6b2783906969630c1b6649bf5b0e6620'
         )
 
+    def test_adds_partner_id_header_to_request(self, request):
+        assert (
+            request.headers['X-Netvisor-Authentication-PartnerId'] ==
+            'xxx_yyy'
+        )
+
     def test_make_transaction_id_uses_uuid(self, auth):
         fake_uuid = flexmock(hex='123456')
         flexmock(uuid).should_receive('uuid4').and_return(fake_uuid).once()

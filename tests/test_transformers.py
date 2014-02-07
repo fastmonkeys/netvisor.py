@@ -1,36 +1,87 @@
+import pytest
+
 from netvisor import transformers
 
 
-class TestRename(object):
-    def test_renames_matching_key(self):
-        data = {
+class _TestTransformer(object):
+    def test_transforms_data_correctly(self, transformer, data, expected):
+        assert transformer.transform(data) == expected
+
+    def test_transforming_transformed_data(self, transformer, expected):
+        assert transformer.transform(expected) == expected
+
+    def test_tranforming_returns_a_new_object(self, transformer, data):
+        assert id(transformer.transform(data)) != id(data)
+
+
+class TestRename(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Rename('product_code', 'code')
+
+    @pytest.fixture
+    def data(self):
+        return {
             "product_code": "CC",
             "product_group": "Kirjat"
         }
-        transformer = transformers.Rename('product_code', 'code')
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "code": "CC",
             "product_group": "Kirjat"
         }
 
 
-class TestRemove(object):
-    def test_removes_matching_key(self):
-        data = {
+class TestAdd(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Add('product_group', 'Kirjat')
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "product_code": "CC",
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            "product_code": "CC",
+            "product_group": "Kirjat",
+        }
+
+
+class TestRemove(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Remove('uri')
+
+    @pytest.fixture
+    def data(self):
+        return {
             "product_code": "CC",
             "product_group": "Kirjat",
             "uri": "http://koulutus.netvisor.fi/getproduct.nv?id=165"
         }
-        transformer = transformers.Remove('uri')
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "product_code": "CC",
             "product_group": "Kirjat",
         }
 
 
-class TestFlatten(object):
-    def test_flattens_matching_key(self):
-        data = {
+class TestFlatten(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Flatten('customer_base_information')
+
+    @pytest.fixture
+    def data(self):
+        return {
             "customer_base_information": {
                 "name": "John Smith",
                 "email": "john@smith.net",
@@ -41,10 +92,10 @@ class TestFlatten(object):
                 "delivery_post_number": "53100",
             }
         }
-        transformer = transformers.Flatten(
-            'customer_base_information'
-        )
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "name": "John Smith",
             "email": "john@smith.net",
             "customer_delivery_details": {
@@ -55,35 +106,116 @@ class TestFlatten(object):
         }
 
 
-class TestListify(object):
-    def test_makes_matching_keys_value_a_list(self):
-        data = {
+class TestNest(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Nest(
+            'street_address',
+            [
+                'street',
+                'postal_code',
+                'postal_office',
+            ]
+        )
+
+    @pytest.fixture
+    def data(self):
+        return {
+            'business_code': '1234567-8',
+            'name': 'ACME',
+            'street': 'Esimerkkikatu 123',
+            'postal_code': '00100',
+            'postal_office': 'Helsinki',
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            'business_code': '1234567-8',
+            'name': 'ACME',
+            'street_address': {
+                'street': 'Esimerkkikatu 123',
+                'postal_code': '00100',
+                'postal_office': 'Helsinki',
+            }
+        }
+
+
+class TestNestAddsToExistingDict(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Nest(
+            'street_address',
+            [
+                'street',
+                'postal_code',
+                'postal_office',
+            ]
+        )
+
+    @pytest.fixture
+    def data(self):
+        return {
+            'street': 'Esimerkkikatu 123',
+            'postal_code': '00100',
+            'postal_office': 'Helsinki',
+            'street_address': {
+                'country': 'FI'
+            }
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            'street_address': {
+                'street': 'Esimerkkikatu 123',
+                'postal_code': '00100',
+                'postal_office': 'Helsinki',
+                'country': 'FI'
+            }
+        }
+
+
+class TestNestCanNestKeyWithSameNameAsParent(object):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Nest('street_address', ['street_address'])
+
+    @pytest.fixture
+    def data(self):
+        return {
+            'street_address': 'Esimerkkikatu 123'
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            'street_address': {
+                'street_address': 'Esimerkkikatu 123'
+            }
+        }
+
+    def test_transforms_data_correctly(self, transformer, data, expected):
+        assert transformer.transform(data) == expected
+
+
+class TestListify(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Listify('products')
+
+    @pytest.fixture
+    def data(self):
+        return {
             "products": {
                 "code": "TT",
                 "name": "Testituote"
             }
         }
-        transformer = transformers.Listify('products')
-        assert transformer.transform(data) == {
-            "products": [
-                {
-                    "code": "TT",
-                    "name": "Testituote"
-                }
-            ]
-        }
 
-    def test_doesnt_touch_values_that_are_already_lists(self):
-        data = {
-            "products": [
-                {
-                    "code": "TT",
-                    "name": "Testituote"
-                }
-            ]
-        }
-        transformer = transformers.Listify('products')
-        assert transformer.transform(data) == {
+    @pytest.fixture
+    def expected(self):
+        return {
             "products": [
                 {
                     "code": "TT",
@@ -93,115 +225,163 @@ class TestListify(object):
         }
 
 
-class TestUnderscore(object):
-    def test_underscorifies_all_keys(self):
-        data = {
-            "ProductCode": "CC",
-            "ProductGroup": "Kirjat"
-        }
-        transformer = transformers.Underscore()
-        assert transformer.transform(data) == {
-            "product_code": "CC",
-            "product_group": "Kirjat",
-        }
 
-    def test_undescorifies_nested_dicts(self):
-        data = {
-            "Product": {
-                "ProductCode": "CC",
-                "ProductGroup": "Kirjat"
-            }
-        }
-        transformer = transformers.Underscore()
-        assert transformer.transform(data) == {
-            "product": {
-                "product_code": "CC",
-                "product_group": "Kirjat",
+class TestListifyWithNonExistingKey(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Listify('products')
+
+    @pytest.fixture
+    def data(self):
+        return {}
+
+    @pytest.fixture
+    def expected(self):
+        return {}
+
+
+class TestUnderscore(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Underscore()
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "ProductList": {
+                "Product": [
+                    {
+                        "ProductCode": "CC",
+                        "ProductGroup": "Kirjat"
+                    },
+                    {
+                        "ProductCode": "DH",
+                        "ProductGroup": "Kirjat"
+                    }
+                ]
             }
         }
 
-    def test_undescorifies_listed_dicts(self):
-        data = {
-            "Products": [
-                {
-                    "ProductCode": "CC",
-                    "ProductGroup": "Kirjat"
-                },
-                {
-                    "ProductCode": "DH",
-                    "ProductGroup": "Kirjat"
-                }
-            ]
-        }
-        transformer = transformers.Underscore()
-        assert transformer.transform(data) == {
-            "products": [
-                {
-                    "product_code": "CC",
-                    "product_group": "Kirjat",
-                },
-                {
-                    "product_code": "DH",
-                    "product_group": "Kirjat",
-                }
-            ]
+    @pytest.fixture
+    def expected(self):
+        return {
+            "product_list": {
+                "product": [
+                    {
+                        "product_code": "CC",
+                        "product_group": "Kirjat"
+                    },
+                    {
+                        "product_code": "DH",
+                        "product_group": "Kirjat"
+                    }
+                ]
+            }
         }
 
 
-class TestCamelize(object):
-    def test_camelizes_all_keys(self):
-        data = {
-            "product_code": "CC",
-            "product_group": "Kirjat"
+class TestCamelize(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Camelize()
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "product_list": {
+                "product": [
+                    {
+                        "product_code": "CC",
+                        "product_group": "Kirjat"
+                    },
+                    {
+                        "product_code": "DH",
+                        "product_group": "Kirjat"
+                    }
+                ]
+            }
         }
-        transformer = transformers.Camelize()
-        assert transformer.transform(data) == {
-            "ProductCode": "CC",
-            "ProductGroup": "Kirjat"
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            "ProductList": {
+                "Product": [
+                    {
+                        "ProductCode": "CC",
+                        "ProductGroup": "Kirjat"
+                    },
+                    {
+                        "ProductCode": "DH",
+                        "ProductGroup": "Kirjat"
+                    }
+                ]
+            }
         }
 
 
-class TestChain(object):
-    def test_applies_given_transformers_in_order(self):
-        data = {
-            "product_code": "CC",
-            "product_group": "Kirjat"
-        }
-        transformer = transformers.Chain([
+class TestChain(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Chain([
             transformers.Rename('product_code', 'code'),
             transformers.Rename('product_group', 'group'),
             transformers.Remove('product_group'),
         ])
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "product_code": "CC",
+            "product_group": "Kirjat"
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "code": "CC",
             "group": "Kirjat"
         }
 
 
-class TestKey(object):
-    def test_applies_transformer_to_given_keys_value(self):
-        data = {
+class TestContextWithDicts(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Context(
+            'product',
+            transformers.Rename('product_code', 'code')
+        )
+
+    @pytest.fixture
+    def data(self):
+        return {
             "product": {
                 "product_code": "CC",
                 "product_group": "Kirjat"
             }
         }
-        transformer = transformers.Key(
-            'product',
-            transformers.Rename(
-                old_key='product_code',
-                new_key='code'
-            )
-        )
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "product": {
                 "code": "CC",
                 "product_group": "Kirjat"
             }
         }
 
-    def test_applies_transformer_to_all_list_elements(self):
-        data = {
+
+class TestContextWithLists(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Context(
+            'products',
+            transformers.Rename('product_code', 'code')
+        )
+
+    @pytest.fixture
+    def data(self):
+        return {
             "products": [
                 {
                     "product_code": "CC",
@@ -213,11 +393,10 @@ class TestKey(object):
                 },
             ]
         }
-        transformer = transformers.Key(
-            'products',
-            transformers.Rename('product_code', 'code')
-        )
-        assert transformer.transform(data) == {
+
+    @pytest.fixture
+    def expected(self):
+        return {
             "products": [
                 {
                     "code": "CC",
@@ -229,3 +408,20 @@ class TestKey(object):
                 },
             ]
         }
+
+
+class TestContextWithNonExistingKey(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return transformers.Context(
+            'product',
+            transformers.Rename('product_code', 'code')
+        )
+
+    @pytest.fixture
+    def data(self):
+        return {}
+
+    @pytest.fixture
+    def expected(self):
+        return {}

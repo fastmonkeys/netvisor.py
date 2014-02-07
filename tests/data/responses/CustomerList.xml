@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <ResponseStatus>
+    <Status>OK</Status>
+    <Timestamp>1.10.2009 16:03:24</Timestamp>
+  </ResponseStatus>
+  <CustomerList>
+    <Customer>
+      <NetvisorKey>165</NetvisorKey>
+      <Name>Anni Asiakas</Name>
+      <Code>AA</Code>
+      <OrganisationIdentifier>12345678-9</OrganisationIdentifier>
+      <Uri>http://koulutus.netvisor.fi/getcustomer.nv?id=165</Uri>
+    </Customer>
+  </CustomerList>
+</Root>

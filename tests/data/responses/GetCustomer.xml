@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <ResponseStatus>
+    <Status>OK</Status>
+    <TimeStamp>7.4.2009 15:53:44</TimeStamp>
+  </ResponseStatus>
+  <Customer>
+    <CustomerBaseInformation>
+      <InternalIdentifier>MM</InternalIdentifier>
+      <ExternalIdentifier />
+      <Name>Maija Mallikas</Name>
+      <NameExtension />
+      <StreetAddress>Pajukuja 2</StreetAddress>
+      <City>Lappeenranta</City>
+      <PostNumber>53100</PostNumber>
+      <Country type="ISO-3166">AF</Country>
+      <PhoneNumber>040 12157 988</PhoneNumber>
+      <FaxNumber />
+      <Email>maija.mallikas@netvisor.fi</Email>
+      <HomePageUri>www.netvisor.fi</HomePageUri>
+    </CustomerBaseInformation>
+    <CustomerFinvoiceDetails>
+      <FinvoiceAddress>FI002316574613249</FinvoiceAddress>
+      <FinvoiceRouterCode>PSPBFIHH</FinvoiceRouterCode>
+    </CustomerFinvoiceDetails>
+    <CustomerDeliveryDetails>
+      <DeliveryName>Matti</DeliveryName>
+      <DeliveryStreetAddress>Pajukuja 90</DeliveryStreetAddress>
+      <DeliveryCity>Lappeenranta</DeliveryCity>
+      <DeliveryPostNumber>53100</DeliveryPostNumber>
+    </CustomerDeliveryDetails>
+    <CustomerContactDetails>
+      <ContactPerson>Perttu</ContactPerson>
+      <ContactPersonEmail />
+      <ContactPersonPhone>040 21578 999</ContactPersonPhone>
+    </CustomerContactDetails>
+    <CustomerAdditionalInformation>
+      <Comment />
+      <ReferenceNumber>1070</ReferenceNumber>
+    </CustomerAdditionalInformation>
+  </Customer>
+</Root>

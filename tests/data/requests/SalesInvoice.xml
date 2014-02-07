@@ -1,0 +1,88 @@
+<Root>
+  <SalesInvoice>
+    <SalesInvoiceDate format="ansi">2008-12-12</SalesInvoiceDate>
+    <SalesInvoiceDeliveryDate format="ansi">2008-07-25</SalesInvoiceDeliveryDate>
+    <SalesInvoiceReferenceNumber>1070</SalesInvoiceReferenceNumber>
+    <SalesInvoiceAmount>244,00</SalesInvoiceAmount>
+    <SellerIdentifier type="netvisor">32</SellerIdentifier>
+    <SalesInvoiceStatus type="netvisor">unsent</SalesInvoiceStatus>
+    <InvoicingCustomerIdentifier type="netvisor">1</InvoicingCustomerIdentifier>
+    <InvoicingCustomerName>Matti Mallikas</InvoicingCustomerName>
+    <InvoicingCustomerNameExtension>Masa</InvoicingCustomerNameExtension>
+    <InvoicingCustomerAddressLine>Pajukuja 1</InvoicingCustomerAddressLine>
+    <InvoicingCustomerAdditionalAddressLine></InvoicingCustomerAdditionalAddressLine>
+    <InvoicingCustomerPostNumber>53100</InvoicingCustomerPostNumber>
+    <InvoicingCustomerTown>Lappeenranta</InvoicingCustomerTown>
+    <InvoicingCustomerCountryCode type="ISO-3166">FI</InvoicingCustomerCountryCode>
+    <DeliveryAddressName>Netvisor Oy</DeliveryAddressName>
+    <DeliveryAddressNameExtension>Ohjelmistokehitys ja tuotanto</DeliveryAddressNameExtension>
+    <DeliveryAddressLine>Snelmanninkatu 12</DeliveryAddressLine>
+    <DeliveryAddressPostNumber>53100</DeliveryAddressPostNumber>
+    <DeliveryAddressTown>LPR</DeliveryAddressTown>
+    <DeliveryAddressCountryCode type="ISO-3166">FI</DeliveryAddressCountryCode>
+    <PaymentTermNetDays>14</PaymentTermNetDays>
+    <PaymentTermCashDiscountDays>5</PaymentTermCashDiscountDays>
+    <PaymentTermCashDiscount type="percentage">9</PaymentTermCashDiscount>
+    <InvoiceLines>
+       <InvoiceLine>
+          <SalesInvoiceProductLine>
+             <ProductIdentifier type="netvisor">1697</ProductIdentifier>
+             <ProductName>Omena</ProductName>
+             <ProductUnitPrice type="net">6,90</ProductUnitPrice>
+             <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
+             <SalesInvoiceProductLineQuantity>2</SalesInvoiceProductLineQuantity>
+             <SalesInvoiceProductLineDiscountPercentage>0</SalesInvoiceProductLineDiscountPercentage>
+             <AccountingAccountSuggestion>3000</AccountingAccountSuggestion>
+             <Dimension>
+                <DimensionName>Liiketoimintayksikkö laskentakohteena</DimensionName>
+                <DimensionItem>Yleishallinto</DimensionItem>
+             </Dimension>
+             <Dimension>
+                <DimensionName>Severan "työ" laskentakohteena</DimensionName>
+                <DimensionItem>Makkaran paisto</DimensionItem>
+             </Dimension>
+           </SalesInvoiceProductLine>
+       </InvoiceLine>
+       <InvoiceLine>
+          <SalesInvoiceProductLine>
+            <ProductIdentifier type="netvisor">1697</ProductIdentifier>
+            <ProductName>Banaani</ProductName>
+            <ProductUnitPrice type="net">100,00</ProductUnitPrice>
+            <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
+            <SalesInvoiceProductLineQuantity>1</SalesInvoiceProductLineQuantity>
+            <AccountingAccountSuggestion>3200</AccountingAccountSuggestion>
+          </SalesInvoiceProductLine>
+      </InvoiceLine>
+      <InvoiceLine>
+        <SalesInvoiceCommentLine>
+            <Comment>Kommenttirivi</Comment>
+        </SalesInvoiceCommentLine>
+      </InvoiceLine>
+    </InvoiceLines>
+    <InvoiceVoucherLines>
+      <VoucherLine>
+        <LineSum type="net">900</LineSum>
+        <Description>Manuuaalinen tositerivi</Description>
+        <AccountNumber>1701</AccountNumber>
+        <VatPercent vatcode="NONE">0</VatPercent>
+      </VoucherLine>
+      <VoucherLine>
+        <LineSum type="net">-900</LineSum>
+        <Description>Manuuaalinen tositerivi</Description>
+        <AccountNumber>3000</AccountNumber>
+        <VatPercent vatcode="KOMY">22</VatPercent>
+      </VoucherLine>
+    </InvoiceVoucherLines>
+    <SalesInvoiceAttachments>
+      <SalesInvoiceAttachment>
+        <MimeType>Application/Pdf</MimeType>
+        <AttachmentDescription>testiliite</AttachmentDescription>
+        <FileName>Testitiedosto</FileName>
+        <DocumentData>
+                /9j/4AAQSkZJRABKDDUQJDJFDgAAD//gAcU29mdHdhcmU6IQDg0QDg0NdCBPZmZpY2X/2wBDAAoH
+                BwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8
+        </DocumentData>
+      </SalesInvoiceAttachment>
+    </SalesInvoiceAttachments>
+  </SalesInvoice>
+</Root>

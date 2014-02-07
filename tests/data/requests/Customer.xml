@@ -1,0 +1,43 @@
+<Root>
+  <Customer>
+    <CustomerBaseInformation>
+      <InternalIdentifier>MM</InternalIdentifier>
+      <ExternalIdentifier>1967543-8</ExternalIdentifier>
+      <Name>Matti Meikäläinen</Name>
+      <NameExtension>Toimitusjohtaja</NameExtension>
+      <StreetAddress>Pajukuja 1</StreetAddress>
+      <AdditionalAddressLine></AdditionalAddressLine>
+      <City>Lappeenranta</City>
+      <PostNumber>53100</PostNumber>
+      <Country type="ISO-3166">FI</Country>
+      <CustomerGroupName>Alennusasiakkaat</CustomerGroupName>
+      <PhoneNumber>040 123456</PhoneNumber>
+      <FaxNumber>05 123456</FaxNumber>
+      <Email>matti.meikalainen@firma.fi</Email>
+      <HomePageUri>www.firma.fi</HomePageUri>
+    </CustomerBaseInformation>
+    <CustomerFinvoiceDetails>
+      <FinvoiceAddress>FI109700021497</FinvoiceAddress>
+      <FinvoiceRouterCode>NDEAFIHH</FinvoiceRouterCode>
+    </CustomerFinvoiceDetails>
+    <CustomerDeliveryDetails>
+      <DeliveryName>Maija Mehiläinen</DeliveryName>
+      <DeliveryStreetAddress>Pajukuja 2</DeliveryStreetAddress>
+      <DeliveryCity>Lappeenranta</DeliveryCity>
+      <DeliveryPostNumber>53900</DeliveryPostNumber>
+      <DeliveryCountry type="ISO-3166">FI</Country>
+    </CustomerDeliveryDetails>
+    <CustomerContactDetails>
+      <ContactName></ContactName>
+      <ContactPerson>Matti Meikäläinen</ContactPerson>
+      <ContactPersonEmail>matti.meikäläine@firma.fi</ContactPersonEmail>
+      <ContactPersonPhone>040 987 254</ContactPersonPhone>
+    </CustomerContactDetails>
+    <CustomerAdditionalInformation>
+      <Comment>Kommentti</Comment>
+      <CustomerReferenceNumber>1070</CustomerReferenceNumber>
+      <DirectDebitBankAccount>104235-XXXXXX</DirectDebitBankAccount>
+      <InvoicingLanguage type="ISO-3166">FI</InvoicingLanguage>
+    </CustomerAdditionalInformation>
+  </Customer>
+</Root>

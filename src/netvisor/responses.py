@@ -39,7 +39,10 @@ class CompanyListResponse(Response):
         tf.Listify('companies'),
         tf.Context(
             'companies',
-            tf.Rename('finnish_organization_identifier', 'business_code')
+            tf.Chain([
+                tf.Remove('id'),
+                tf.Rename('finnish_organization_identifier', 'business_code'),
+            ])
         ),
         tf.Remove('is_more'),
     ])
@@ -75,6 +78,14 @@ class GetCompanyInformationResponse(Response):
         FlattenText('terminated_date'),
         FlattenText('most_recent_change_date'),
         tf.Context(
+            'street_address',
+            tf.Rename('postal_office', 'post_office')
+        ),
+        tf.Context(
+            'postal_address',
+            tf.Rename('postal_office', 'post_office')
+        ),
+        tf.Context(
             'registered_names',
             tf.Chain([
                 tf.Context(
@@ -104,6 +115,29 @@ class GetCompanyInformationResponse(Response):
             ])
         ),
         tf.Flatten('registered_person_roles'),
+        tf.Rename('stat_employer_register_status', 'employer_register_status'),
+        tf.Rename('stat_revenue_size', 'revenue_size'),
+        tf.Rename('stat_staff_size', 'staff_size'),
+        tf.Rename('stat_vat_register_status', 'vat_register_status'),
+        tf.Rename(
+            'stat_standard_industrial_classification2008',
+            'standard_industrial_classification2008'
+        ),
+        tf.Rename(
+            'stat_tax_prepayment_register_status',
+            'tax_prepayment_register_status'
+        ),
+        tf.Nest(
+            'stats',
+            [
+                'employer_register_status',
+                'revenue_size',
+                'staff_size',
+                'vat_register_status',
+                'standard_industrial_classification2008',
+                'tax_prepayment_register_status',
+            ]
+        )
     ])
 
 
@@ -183,6 +217,7 @@ class GetProductResponse(Response):
         tf.Flatten('unit_price'),
         tf.Rename('comission_percentage', 'commission_percentage'),
         tf.Rename('product_inventory_details', 'inventory'),
+        tf.Rename('default_vat_percent', 'default_vat_percentage'),
         tf.Context(
             'inventory',
             tf.Chain([
@@ -262,8 +297,8 @@ class GetSalesInvoiceResponse(Response):
             'free_text_before_lines'
         ),
         tf.Rename('sales_invoice_private_comment', 'private_comment'),
-        tf.Rename('seller_identifier', 'seller_id'),
-        FlattenText('seller_id'),
+        tf.Rename('seller_identifier', 'seller'),
+        FlattenText('seller'),
         FlattenText('payment_term_cash_discount'),
         tf.Rename('invoice_status', 'status'),
         tf.Flatten('invoice_lines'),
@@ -366,16 +401,18 @@ class SalesPaymentListResponse(Response):
             'sales_payments',
             tf.Chain([
                 tf.Rename('sum', 'amount'),
-                tf.Rename(
-                    'bank_status_error_description',
-                    'bank_status_error'
-                ),
                 tf.Context(
-                    'bank_status_error',
+                    'bank_status_error_description',
                     tf.Chain([
-                        tf.Rename('@code', 'code'),
-                        tf.Rename('#text', 'description'),
+                        tf.Rename('@code', 'error_code'),
+                        tf.Rename('#text', 'error_description'),
                     ])
+                ),
+                tf.Flatten('bank_status_error_description'),
+                tf.Rename('bank_status', 'status'),
+                tf.Nest(
+                    'bank_status',
+                    ['status', 'error_code', 'error_description']
                 )
             ])
         )

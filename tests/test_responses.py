@@ -2,14 +2,7 @@
 import io
 import os
 
-import pytest
-
 from netvisor import responses
-
-
-@pytest.fixture(scope='session')
-def responses_dir(data_dir):
-    return os.path.join(data_dir, 'responses')
 
 
 def test_company_list_response(responses_dir):
@@ -22,7 +15,6 @@ def test_company_list_response(responses_dir):
     assert response.parse() == {
         'companies': [
             {
-                'id': u'125',
                 'is_active': u'1',
                 'name': u'ACME',
                 'business_code': u'1234567-8'
@@ -76,12 +68,12 @@ def test_get_company_information_response(responses_dir):
         'street_address': {
             'street': u'Esimerkkikatu 123',
             'postal_code': u'00100',
-            'postal_office': u'Helsinki',
+            'post_office': u'Helsinki',
         },
         'postal_address': {
             'street': None,
             'postal_code': u'00002',
-            'postal_office': u'Helsinki',
+            'post_office': u'Helsinki',
         },
         'email': u'info@generalmotors.fi',
         'phone': u'020 1234567',
@@ -104,12 +96,14 @@ def test_get_company_information_response(responses_dir):
                 'current_activity_status': u'active'
             }
         ],
-        'stat_employer_register_status': u'never_registered',
-        'stat_revenue_size': u'100-200',
-        'stat_staff_size': u'4-9',
-        'stat_vat_register_status': u'currently_registered',
-        'stat_standard_industrial_classification2008': u'Kaivostoiminta',
-        'stat_tax_prepayment_register_status': u'previously_registered',
+        'stats': {
+            'employer_register_status': u'never_registered',
+            'revenue_size': u'100-200',
+            'staff_size': u'4-9',
+            'vat_register_status': u'currently_registered',
+            'standard_industrial_classification2008': u'Kaivostoiminta',
+            'tax_prepayment_register_status': u'previously_registered',
+        }
     }
 
 
@@ -175,7 +169,7 @@ def test_get_product_response(responses_dir):
         'commission_percentage': u'11',
         'is_active': u'1',
         'is_sales_product': u'0',
-        'default_vat_percent': u'22',
+        'default_vat_percentage': u'22',
         'default_domestic_account_number': None,
         'default_eu_account_number': None,
         'default_outside_eu_account_number': None,
@@ -203,7 +197,7 @@ def test_get_sales_invoice(responses_dir):
         'due_date': u'2012-02-11',
         'reference_number': u'1070',
         'amount': u'244,00',
-        'seller_id': u'Jarmo',
+        'seller': u'Jarmo',
         'status': u'Unsent',
         'free_text_before_lines': None,
         'free_text_after_lines': None,
@@ -306,10 +300,10 @@ def test_sales_payment_list_response(responses_dir):
                 'foreign_currency_amount': None,
                 'reference_number': u'1094',
                 'invoice_number': u'1',
-                'bank_status': 'FAILED',
-                'bank_status_error': {
-                    'code': u'ERROR_IN_DUE_DATE',
-                    'description': u'Eräpäivä virheellinen'
+                'bank_status': {
+                    'status': 'FAILED',
+                    'error_code': u'ERROR_IN_DUE_DATE',
+                    'error_description': u'Eräpäivä virheellinen'
                 }
             }
         ]

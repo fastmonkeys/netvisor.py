@@ -225,7 +225,6 @@ class TestListify(_TestTransformer):
         }
 
 
-
 class TestListifyWithNonExistingKey(_TestTransformer):
     @pytest.fixture
     def transformer(self):

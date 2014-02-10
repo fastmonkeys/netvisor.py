@@ -1,6 +1,17 @@
 import pytest
 
-from netvisor import transformers
+from netvisor.primitives import (
+    Add,
+    Camelize,
+    Chain,
+    Context,
+    Flatten,
+    Listify,
+    Nest,
+    Remove,
+    Rename,
+    Underscore,
+)
 
 
 class _TestTransformer(object):
@@ -17,7 +28,7 @@ class _TestTransformer(object):
 class TestRename(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Rename('product_code', 'code')
+        return Rename('product_code', 'code')
 
     @pytest.fixture
     def data(self):
@@ -37,7 +48,7 @@ class TestRename(_TestTransformer):
 class TestAdd(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Add('product_group', 'Kirjat')
+        return Add('product_group', 'Kirjat')
 
     @pytest.fixture
     def data(self):
@@ -56,7 +67,7 @@ class TestAdd(_TestTransformer):
 class TestRemove(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Remove('uri')
+        return Remove('uri')
 
     @pytest.fixture
     def data(self):
@@ -77,7 +88,7 @@ class TestRemove(_TestTransformer):
 class TestFlatten(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Flatten('customer_base_information')
+        return Flatten('customer_base_information')
 
     @pytest.fixture
     def data(self):
@@ -109,7 +120,7 @@ class TestFlatten(_TestTransformer):
 class TestNest(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Nest(
+        return Nest(
             'street_address',
             [
                 'street',
@@ -144,7 +155,7 @@ class TestNest(_TestTransformer):
 class TestNestAddsToExistingDict(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Nest(
+        return Nest(
             'street_address',
             [
                 'street',
@@ -179,7 +190,7 @@ class TestNestAddsToExistingDict(_TestTransformer):
 class TestNestCanNestKeyWithSameNameAsParent(object):
     @pytest.fixture
     def transformer(self):
-        return transformers.Nest('street_address', ['street_address'])
+        return Nest('street_address', ['street_address'])
 
     @pytest.fixture
     def data(self):
@@ -202,7 +213,7 @@ class TestNestCanNestKeyWithSameNameAsParent(object):
 class TestListify(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Listify('products')
+        return Listify('products')
 
     @pytest.fixture
     def data(self):
@@ -228,7 +239,7 @@ class TestListify(_TestTransformer):
 class TestListifyWithNonExistingKey(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Listify('products')
+        return Listify('products')
 
     @pytest.fixture
     def data(self):
@@ -242,7 +253,7 @@ class TestListifyWithNonExistingKey(_TestTransformer):
 class TestUnderscore(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Underscore()
+        return Underscore()
 
     @pytest.fixture
     def data(self):
@@ -282,7 +293,7 @@ class TestUnderscore(_TestTransformer):
 class TestCamelize(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Camelize()
+        return Camelize()
 
     @pytest.fixture
     def data(self):
@@ -322,10 +333,10 @@ class TestCamelize(_TestTransformer):
 class TestChain(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Chain([
-            transformers.Rename('product_code', 'code'),
-            transformers.Rename('product_group', 'group'),
-            transformers.Remove('product_group'),
+        return Chain([
+            Rename('product_code', 'code'),
+            Rename('product_group', 'group'),
+            Remove('product_group'),
         ])
 
     @pytest.fixture
@@ -346,10 +357,7 @@ class TestChain(_TestTransformer):
 class TestContextWithDicts(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Context(
-            'product',
-            transformers.Rename('product_code', 'code')
-        )
+        return Context('product', Rename('product_code', 'code'))
 
     @pytest.fixture
     def data(self):
@@ -373,10 +381,7 @@ class TestContextWithDicts(_TestTransformer):
 class TestContextWithLists(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Context(
-            'products',
-            transformers.Rename('product_code', 'code')
-        )
+        return Context('products', Rename('product_code', 'code'))
 
     @pytest.fixture
     def data(self):
@@ -412,10 +417,7 @@ class TestContextWithLists(_TestTransformer):
 class TestContextWithNonExistingKey(_TestTransformer):
     @pytest.fixture
     def transformer(self):
-        return transformers.Context(
-            'product',
-            transformers.Rename('product_code', 'code')
-        )
+        return Context('product', Rename('product_code', 'code'))
 
     @pytest.fixture
     def data(self):

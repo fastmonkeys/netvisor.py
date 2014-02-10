@@ -139,3 +139,18 @@ class Underscore(DeepKeyTransformer):
 class Camelize(DeepKeyTransformer):
     def transform_key(self, key):
         return inflection.camelize(key)
+
+
+class FlattenText(Chain):
+    def __init__(self, key):
+        super(FlattenText, self).__init__([
+            Context(
+                key,
+                Chain([
+                    Rename('#text', key),
+                    Remove('@format'),
+                    Remove('@type'),
+                ])
+            ),
+            Flatten(key),
+        ])

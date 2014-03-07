@@ -20,7 +20,7 @@ def test_get_product_response(responses_dir):
         'group': u'Kirjat',
         'name': u'Code Complete',
         'description': u'Toinen painos',
-        'unit_price': u'42,5',
+        'unit_price': u'42.5',
         'unit_price_type': u'brutto',
         'unit': u'kpl',
         'unit_weight': u'1',
@@ -34,11 +34,11 @@ def test_get_product_response(responses_dir):
         'default_eu_account_number': None,
         'default_outside_eu_account_number': None,
         'inventory': {
-            'amount': u'2,00',
-            'mid_price': u'5,00',
-            'value': u'10,0000',
-            'reserved_amount': u'1,00',
-            'ordered_amount': u'0,00',
+            'amount': u'2.00',
+            'mid_price': u'5.00',
+            'value': u'10.0000',
+            'reserved_amount': u'1.00',
+            'ordered_amount': u'0.00',
         }
     }
 
@@ -55,7 +55,7 @@ def test_product_list_response(responses_dir):
                 'netvisor_key': u'165',
                 'code': u'TT',
                 'name': u'Testituote',
-                'unit_price': u'1,96',
+                'unit_price': u'1.96',
             }
         ]
     }

@@ -3,6 +3,7 @@ from .primitives import (
     Context,
     Flatten,
     Listify,
+    NormalizeDecimalPoint,
     Rename,
     Remove,
     Underscore,
@@ -20,6 +21,7 @@ product_list_response_transformer = Chain([
         'products',
         Chain([
             Remove('uri'),
+            NormalizeDecimalPoint('unit_price'),
             Rename('product_code', 'code')
         ])
     ),
@@ -46,6 +48,7 @@ get_product_response_transformer = Chain([
     Rename('comission_percentage', 'commission_percentage'),
     Rename('product_inventory_details', 'inventory'),
     Rename('default_vat_percent', 'default_vat_percentage'),
+    NormalizeDecimalPoint('unit_price'),
     Context(
         'inventory',
         Chain([
@@ -54,6 +57,11 @@ get_product_response_transformer = Chain([
             Rename('inventory_value', 'value'),
             Rename('inventory_reserved_amount', 'reserved_amount'),
             Rename('inventory_ordered_amount', 'ordered_amount'),
+            NormalizeDecimalPoint('amount'),
+            NormalizeDecimalPoint('mid_price'),
+            NormalizeDecimalPoint('value'),
+            NormalizeDecimalPoint('reserved_amount'),
+            NormalizeDecimalPoint('ordered_amount'),
         ])
     )
 ])

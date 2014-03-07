@@ -5,6 +5,7 @@ from .primitives import (
     FlattenText,
     Listify,
     Nest,
+    NormalizeDecimalPoint,
     Rename,
     Remove,
     Underscore,
@@ -37,6 +38,8 @@ sales_invoice_list_response_transformer = Chain([
                 ])
             ),
             Flatten('invoice_status'),
+            NormalizeDecimalPoint('amount'),
+            NormalizeDecimalPoint('open_amount'),
         ])
     )
 ])
@@ -98,6 +101,7 @@ get_sales_invoice_response_transformer = Chain([
     ),
     Rename('sales_invoice_referencenumber', 'reference_number'),
     Rename('sales_invoice_amount', 'amount'),
+    NormalizeDecimalPoint('amount'),
     Rename(
         'sales_invoice_free_text_after_lines',
         'free_text_after_lines'
@@ -139,7 +143,11 @@ get_sales_invoice_response_transformer = Chain([
             Rename('sales_invoice_product_line_free_text', 'free_text'),
             Rename('sales_invoice_product_line_vat_sum', 'vat_amount'),
             Rename('sales_invoice_product_line_sum', 'amount'),
-
+            NormalizeDecimalPoint('quantity'),
+            NormalizeDecimalPoint('vat_amount'),
+            NormalizeDecimalPoint('amount'),
+            NormalizeDecimalPoint('vat_percentage'),
+            NormalizeDecimalPoint('unit_price'),
             Rename(
                 'accounting_account_suggestion',
                 'accounting_suggestion'

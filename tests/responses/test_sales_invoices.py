@@ -21,7 +21,7 @@ def test_get_sales_invoice(responses_dir):
         'delivery_date': u'2012-01-27',
         'due_date': u'2012-02-11',
         'reference_number': u'1070',
-        'amount': u'244,00',
+        'amount': u'244.00',
         'seller': u'Jarmo',
         'status': u'Unsent',
         'free_text_before_lines': None,
@@ -55,12 +55,12 @@ def test_get_sales_invoice(responses_dir):
                 'name': u'Omena',
                 'free_text': None,
                 'quantity': u'2',
-                'unit_price': u'6,9000',
+                'unit_price': u'6.9000',
                 'discount_percentage': u'0',
                 'vat_percentage': u'22',
                 'vat_code': u'KOMY',
-                'vat_amount': u'3,04',
-                'amount': u'16,84',
+                'vat_amount': u'3.04',
+                'amount': u'16.84',
                 'accounting_suggestion': u'551',
             },
         ]
@@ -83,8 +83,8 @@ def test_sales_invoice_list_response(responses_dir):
                 'status': u'open',
                 'substatus': u'overdue',
                 'reference_number': u'1070',
-                'amount': u'123,45',
-                'open_amount': u'45,67',
+                'amount': u'123.45',
+                'open_amount': u'45.67',
             }
         ]
     }

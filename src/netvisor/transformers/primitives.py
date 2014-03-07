@@ -87,6 +87,11 @@ class Listify(ValueTransformer):
             return [value]
 
 
+class NormalizeDecimalPoint(ValueTransformer):
+    def transform_value(self, value):
+        return value.replace(',', '.')
+
+
 class Chain(object):
     def __init__(self, transformers):
         self.transformers = transformers

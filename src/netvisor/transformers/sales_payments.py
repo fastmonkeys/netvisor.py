@@ -4,6 +4,7 @@ from .primitives import (
     Flatten,
     Listify,
     Nest,
+    NormalizeDecimalPoint,
     Rename,
     Remove,
     Underscore,
@@ -21,6 +22,7 @@ sales_payment_list_response_transformer = Chain([
         'sales_payments',
         Chain([
             Rename('sum', 'amount'),
+            NormalizeDecimalPoint('amount'),
             Context(
                 'bank_status_error_description',
                 Chain([

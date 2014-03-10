@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
-import io
-import os
-
 from netvisor.responses.products import (
     ProductListResponse,
     GetProductResponse,
 )
+from ..utils import get_response_text
 
 
-def test_get_product_response(responses_dir):
-    filename = os.path.join(responses_dir, 'GetProduct.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_get_product_response():
+    xml = get_response_text('GetProduct.xml')
     response = GetProductResponse(xml)
     assert response.parse() == {
-        'netvisor_key': u'165',
+        'id': u'165',
         'code': u'CC',
         'group': u'Kirjat',
         'name': u'Code Complete',
@@ -43,16 +38,13 @@ def test_get_product_response(responses_dir):
     }
 
 
-def test_product_list_response(responses_dir):
-    filename = os.path.join(responses_dir, 'ProductList.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_product_list_response():
+    xml = get_response_text('ProductList.xml')
     response = ProductListResponse(xml)
     assert response.parse() == {
-        'products': [
+        'objects': [
             {
-                'netvisor_key': u'165',
+                'id': u'165',
                 'code': u'TT',
                 'name': u'Testituote',
                 'unit_price': u'1.96',

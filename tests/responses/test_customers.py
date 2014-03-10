@@ -1,24 +1,19 @@
 # -*- coding: utf-8 -*-
-import io
-import os
-
 from netvisor.responses.customers import (
     CustomerListResponse,
     GetCustomerResponse,
 )
+from ..utils import get_response_text
 
 
-def test_customer_list_response(responses_dir):
-    filename = os.path.join(responses_dir, 'CustomerList.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_customer_list_response():
+    xml = get_response_text('CustomerList.xml')
     response = CustomerListResponse(xml)
 
     assert response.parse() == {
-        'customers': [
+        'objects': [
             {
-                'netvisor_key': u'165',
+                'id': u'165',
                 'name': u'Anni Asiakas',
                 'code': u'AA',
                 'business_code': u'12345678-9',
@@ -27,11 +22,8 @@ def test_customer_list_response(responses_dir):
     }
 
 
-def test_get_customer_response(responses_dir):
-    filename = os.path.join(responses_dir, 'GetCustomer.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_get_customer_response():
+    xml = get_response_text('GetCustomer.xml')
     response = GetCustomerResponse(xml)
     assert response.parse() == {
         'code': u'MM',

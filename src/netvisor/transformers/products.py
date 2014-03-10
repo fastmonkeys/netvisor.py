@@ -15,14 +15,15 @@ product_list_response_transformer = Chain([
     Flatten('root'),               # REMOVE?
     Flatten('product_list'),       # REMOVE?
     Remove('response_status'),     # REMOVE?
-    Rename('product', 'products'),
-    Listify('products'),
+    Rename('product', 'objects'),
+    Listify('objects'),
     Context(
-        'products',
+        'objects',
         Chain([
+            Rename('netvisor_key', 'id'),
+            Rename('product_code', 'code'),
             Remove('uri'),
             NormalizeDecimalPoint('unit_price'),
-            Rename('product_code', 'code')
         ])
     ),
 ])
@@ -35,6 +36,7 @@ get_product_response_transformer = Chain([
     Flatten('product'),            # REMOVE?
     Flatten('product_base_information'),
     Flatten('product_book_keeping_details'),
+    Rename('netvisor_key', 'id'),
     Rename('product_code', 'code'),
     Rename('product_group', 'group'),
     Context(

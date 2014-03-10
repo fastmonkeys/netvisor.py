@@ -5,6 +5,7 @@ from .primitives import (
     FlattenText,
     Listify,
     Nest,
+    NormalizeActivityStatus,
     Rename,
     Remove,
     Underscore,
@@ -16,10 +17,10 @@ company_list_response_transformer = Chain([
     Flatten('root'),               # REMOVE?
     Flatten('company_list'),       # REMOVE?
     Remove('response_status'),     # REMOVE?
-    Rename('company', 'companies'),
-    Listify('companies'),
+    Rename('company', 'objects'),
+    Listify('objects'),
     Context(
-        'companies',
+        'objects',
         Chain([
             Remove('id'),
             Rename('finnish_organization_identifier', 'business_code'),
@@ -36,6 +37,8 @@ get_company_information_response_transformer = Chain([
     Remove('netvisor_disclaimer'),     # REMOVE?
     Flatten('company'),                # REMOVE?
     Rename('finnish_organization_identifier', 'business_code'),
+    Rename('current_activity_status', 'is_active'),
+    NormalizeActivityStatus('is_active'),
     FlattenText('established_date'),
     FlattenText('terminated_date'),
     FlattenText('most_recent_change_date'),
@@ -55,6 +58,8 @@ get_company_information_response_transformer = Chain([
                 Chain([
                     FlattenText('established_date'),
                     FlattenText('terminated_date'),
+                    Rename('current_activity_status', 'is_active'),
+                    NormalizeActivityStatus('is_active'),
                 ])
             ),
             Rename('registered_name', 'registered_names'),

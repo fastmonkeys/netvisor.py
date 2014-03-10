@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
-import io
-import os
-
 from netvisor.responses.sales_payments import SalesPaymentListResponse
+from ..utils import get_response_text
 
 
-def test_sales_payment_list_response(responses_dir):
-    filename = os.path.join(responses_dir, 'SalesPaymentList.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_sales_payment_list_response():
+    xml = get_response_text('SalesPaymentList.xml')
     response = SalesPaymentListResponse(xml)
 
     assert response.parse() == {
-        'sales_payments': [
+        'objects': [
             {
-                'netvisor_key': u'165',
+                'id': u'165',
                 'name': u'Matti Mallikas',
                 'date': u'7.2.2014',
                 'amount': u'250',
@@ -23,7 +18,7 @@ def test_sales_payment_list_response(responses_dir):
                 'reference_number': u'1094',
                 'invoice_number': u'1',
                 'bank_status': {
-                    'status': 'FAILED',
+                    'is_ok': '0',
                     'error_code': u'ERROR_IN_DUE_DATE',
                     'error_description': u'Eräpäivä virheellinen'
                 }

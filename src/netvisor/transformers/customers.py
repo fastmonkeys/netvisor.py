@@ -16,13 +16,14 @@ customer_list_response_transformer = Chain([
     Flatten('root'),               # REMOVE?
     Flatten('customer_list'),      # REMOVE?
     Remove('response_status'),     # REMOVE?
-    Rename('customer', 'customers'),
-    Listify('customers'),
+    Rename('customer', 'objects'),
+    Listify('objects'),
     Context(
-        'customers',
+        'objects',
         Chain([
+            Rename('netvisor_key', 'id'),
+            Rename('organisation_identifier', 'business_code'),
             Remove('uri'),
-            Rename('organisation_identifier', 'business_code')
         ])
     ),
 ])

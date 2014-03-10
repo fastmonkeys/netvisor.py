@@ -4,6 +4,7 @@ from .primitives import (
     Flatten,
     Listify,
     Nest,
+    NormalizeBankStatus,
     NormalizeDecimalPoint,
     Rename,
     Remove,
@@ -16,11 +17,12 @@ sales_payment_list_response_transformer = Chain([
     Flatten('root'),                 # REMOVE?
     Remove('response_status'),       # REMOVE?
     Flatten('sales_payment_list'),   # REMOVE?
-    Rename('sales_payment', 'sales_payments'),
-    Listify('sales_payments'),
+    Rename('sales_payment', 'objects'),
+    Listify('objects'),
     Context(
-        'sales_payments',
+        'objects',
         Chain([
+            Rename('netvisor_key', 'id'),
             Rename('sum', 'amount'),
             NormalizeDecimalPoint('amount'),
             Context(
@@ -31,10 +33,11 @@ sales_payment_list_response_transformer = Chain([
                 ])
             ),
             Flatten('bank_status_error_description'),
-            Rename('bank_status', 'status'),
+            NormalizeBankStatus('bank_status'),
+            Rename('bank_status', 'is_ok'),
             Nest(
                 'bank_status',
-                ['status', 'error_code', 'error_description']
+                ['is_ok', 'error_code', 'error_description']
             )
         ])
     )

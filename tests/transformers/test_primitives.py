@@ -1,6 +1,6 @@
 import pytest
 
-from netvisor.primitives import (
+from netvisor.transformers.primitives import (
     Add,
     Camelize,
     Chain,

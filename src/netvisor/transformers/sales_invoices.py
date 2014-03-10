@@ -6,6 +6,7 @@ from .primitives import (
     Listify,
     Nest,
     NormalizeDecimalPoint,
+    NormalizeYesNoBoolean,
     Rename,
     Remove,
     Underscore,
@@ -17,11 +18,12 @@ sales_invoice_list_response_transformer = Chain([
     Flatten('root'),                 # REMOVE?
     Remove('response_status'),       # REMOVE?
     Flatten('sales_invoice_list'),   # REMOVE?
-    Rename('sales_invoice', 'sales_invoices'),
-    Listify('sales_invoices'),
+    Rename('sales_invoice', 'objects'),
+    Listify('objects'),
     Context(
-        'sales_invoices',
+        'objects',
         Chain([
+            Rename('netvisor_key', 'id'),
             Rename('invoice_number', 'number'),
             Rename('invoice_date', 'date'),
             Rename('invoice_sum', 'amount'),
@@ -115,6 +117,7 @@ get_sales_invoice_response_transformer = Chain([
     FlattenText('seller'),
     FlattenText('payment_term_cash_discount'),
     Rename('invoice_status', 'status'),
+    NormalizeYesNoBoolean('match_partial_payments_by_default'),
     Flatten('invoice_lines'),
     Flatten('invoice_line'),
     Rename('sales_invoice_product_line', 'lines'),

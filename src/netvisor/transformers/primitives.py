@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import inflection
 
 
@@ -90,6 +91,33 @@ class Listify(ValueTransformer):
 class NormalizeDecimalPoint(ValueTransformer):
     def transform_value(self, value):
         return value.replace(',', '.')
+
+
+class NormalizeActivityStatus(ValueTransformer):
+    def transform_value(self, value):
+        if value == 'active':
+            return '1'
+        elif value == 'inactive':
+            return '0'
+        raise ValueError(value)
+
+
+class NormalizeYesNoBoolean(ValueTransformer):
+    def transform_value(self, value):
+        if value in (u'Kyllä', u'Yes'):
+            return '1'
+        elif value in (u'Ei', u'No'):
+            return '0'
+        raise ValueError(value)
+
+
+class NormalizeBankStatus(ValueTransformer):
+    def transform_value(self, value):
+        if value == u'OK':
+            return '1'
+        elif value == u'FAILED':
+            return '0'
+        raise ValueError(value)
 
 
 class Chain(object):

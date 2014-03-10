@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
-import io
-import os
-
 from netvisor.responses.companies import (
     CompanyListResponse,
     GetCompanyInformationResponse,
 )
+from ..utils import get_response_text
 
 
-def test_company_list_response(responses_dir):
-    filename = os.path.join(responses_dir, 'CompanyList.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_company_list_response():
+    xml = get_response_text('CompanyList.xml')
     response = CompanyListResponse(xml)
 
     assert response.parse() == {
-        'companies': [
+        'objects': [
             {
                 'is_active': u'1',
                 'name': u'ACME',
@@ -26,11 +21,8 @@ def test_company_list_response(responses_dir):
     }
 
 
-def test_get_company_information_response(responses_dir):
-    filename = os.path.join(responses_dir, 'GetCompanyInformation.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_get_company_information_response():
+    xml = get_response_text('GetCompanyInformation.xml')
     response = GetCompanyInformationResponse(xml)
 
     assert response.parse() == {
@@ -45,7 +37,7 @@ def test_get_company_information_response(responses_dir):
         'established_date': u'2009-12-31',
         'terminated_date': u'2009-12-31',
         'most_recent_change_date': u'2009-12-31',
-        'current_activity_status': u'active',
+        'is_active': u'1',
         'current_special_status': None,
         'domicile': u'Helsinki',
         'activity_description': u'Kebab',
@@ -77,7 +69,7 @@ def test_get_company_information_response(responses_dir):
                 'terminated_date': u'2009-12-31',
                 'type': u'Päätoiminimi',
                 'name': u'Pekan yritys Oy',
-                'current_activity_status': u'active'
+                'is_active': u'1'
             }
         ],
         'stats': {

@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
-import io
-import os
-
 from netvisor.responses.sales_invoices import (
     SalesInvoiceListResponse,
     GetSalesInvoiceResponse,
 )
+from ..utils import get_response_text
 
 
-def test_get_sales_invoice(responses_dir):
-    filename = os.path.join(responses_dir, 'GetSalesInvoice.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_get_sales_invoice():
+    xml = get_response_text('GetSalesInvoice.xml')
     response = GetSalesInvoiceResponse(xml)
 
     assert response.parse() == {
@@ -36,7 +31,7 @@ def test_get_sales_invoice(responses_dir):
             'post_office': u'Lappeenranta',
             'country': u'FINLAND',
         },
-        'match_partial_payments_by_default': u'No',
+        'match_partial_payments_by_default': u'0',
         'delivery_address': {
             'name': u'Netvisor Oy',
             'street': u'Snelmanninkatu 12',
@@ -67,17 +62,14 @@ def test_get_sales_invoice(responses_dir):
     }
 
 
-def test_sales_invoice_list_response(responses_dir):
-    filename = os.path.join(responses_dir, 'SalesInvoiceList.xml')
-    with io.open(filename, 'r', encoding='utf-8') as f:
-        xml = f.read()
-
+def test_sales_invoice_list_response():
+    xml = get_response_text('SalesInvoiceList.xml')
     response = SalesInvoiceListResponse(xml)
 
     assert response.parse() == {
-        'sales_invoices': [
+        'objects': [
             {
-                'netvisor_key': u'165',
+                'id': u'165',
                 'number': u'5',
                 'date': u'2013-11-09',
                 'status': u'open',

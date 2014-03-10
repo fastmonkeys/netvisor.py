@@ -33,7 +33,7 @@ def auth():
 
 class TestNetvisorAuth(object):
     @pytest.fixture
-    def request(self, request, auth):
+    def http_request(self, request, auth):
         (
             flexmock(auth)
             .should_receive('make_transaction_id')
@@ -106,45 +106,47 @@ class TestNetvisorAuth(object):
             msg = str(exc_info.value)
             assert msg == "language must be one of ('EN', 'FI', 'SE')"
 
-    def test_adds_sender_header_to_request(self, request):
+    def test_adds_sender_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-Sender'] ==
+            http_request.headers['X-Netvisor-Authentication-Sender'] ==
             'Testiclient'
         )
 
-    def test_adds_customer_id_header_to_request(self, request):
+    def test_adds_customer_id_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-CustomerId'] ==
+            http_request.headers['X-Netvisor-Authentication-CustomerId'] ==
             'Integraatiokayttajan tunnus'
         )
 
-    def test_adds_timestamp_header_to_request(self, request):
+    def test_adds_timestamp_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-Timestamp'] ==
+            http_request.headers['X-Netvisor-Authentication-Timestamp'] ==
             '2009-01-12 15:49:12.221'
         )
 
-    def test_adds_language_header_to_request(self, request):
-        assert request.headers['X-Netvisor-Interface-Language'] == 'FI'
+    def test_adds_language_header_to_request(self, http_request):
+        assert http_request.headers['X-Netvisor-Interface-Language'] == 'FI'
 
-    def test_adds_organization_id_header_to_request(self, request):
-        assert request.headers['X-Netvisor-Organisation-ID'] == '1967543-8'
-
-    def test_adds_transaction_id_header_to_request(self, request):
+    def test_adds_organization_id_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-TransactionId'] ==
+            http_request.headers['X-Netvisor-Organisation-ID'] == '1967543-8'
+        )
+
+    def test_adds_transaction_id_header_to_request(self, http_request):
+        assert (
+            http_request.headers['X-Netvisor-Authentication-TransactionId'] ==
             '123456'
         )
 
-    def test_adds_mac_header_to_request(self, request):
+    def test_adds_mac_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-MAC'] ==
+            http_request.headers['X-Netvisor-Authentication-MAC'] ==
             '6b2783906969630c1b6649bf5b0e6620'
         )
 
-    def test_adds_partner_id_header_to_request(self, request):
+    def test_adds_partner_id_header_to_request(self, http_request):
         assert (
-            request.headers['X-Netvisor-Authentication-PartnerId'] ==
+            http_request.headers['X-Netvisor-Authentication-PartnerId'] ==
             'xxx_yyy'
         )
 

@@ -4,7 +4,7 @@ import decimal
 import pytest
 import xmltodict
 
-from netvisor.postprocessors.core import (
+from netvisor.postprocessors import (
     Boolean,
     Chain,
     Context,

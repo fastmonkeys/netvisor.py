@@ -1,13 +1,13 @@
-from ..transformers.sales_invoices import (
-    get_sales_invoice_response_transformer,
-    sales_invoice_list_response_transformer,
+from ..postprocessors.sales_invoices import (
+    get_sales_invoice_response_postprocessor,
+    sales_invoice_list_response_postprocessor,
 )
 from .base import Response
 
 
 class SalesInvoiceListResponse(Response):
-    transformer = sales_invoice_list_response_transformer
+    postprocessor = sales_invoice_list_response_postprocessor
 
 
 class GetSalesInvoiceResponse(Response):
-    transformer = get_sales_invoice_response_transformer
+    postprocessor = get_sales_invoice_response_postprocessor

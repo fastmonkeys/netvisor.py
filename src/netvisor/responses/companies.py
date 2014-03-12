@@ -1,13 +1,13 @@
-from ..transformers.companies import (
-    get_company_information_response_transformer,
-    company_list_response_transformer,
+from ..postprocessors.companies import (
+    get_company_information_response_postprocessor,
+    company_list_response_postprocessor,
 )
 from .base import Response
 
 
 class CompanyListResponse(Response):
-    transformer = company_list_response_transformer
+    postprocessor = company_list_response_postprocessor
 
 
 class GetCompanyInformationResponse(Response):
-    transformer = get_company_information_response_transformer
+    postprocessor = get_company_information_response_postprocessor

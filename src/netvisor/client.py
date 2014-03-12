@@ -6,8 +6,6 @@
     :license: BSD, see LICENSE for more details.
 """
 import requests
-import xmltodict
-from .exc import NetvisorError
 
 
 class Client(object):
@@ -25,28 +23,8 @@ class Client(object):
 
     def request(self, method, path, **kwargs):
         url = self.make_url(path)
-        response = Response(self.requester.request(method, url, **kwargs))
-        response.raise_for_failure()
+        response = self.requester.request(method, url, **kwargs)
         return response
 
     def make_url(self, path):
         return '{host}/{path}'.format(host=self.host, path=path)
-
-
-class Response(object):
-
-    def __init__(self, response):
-        self.response = response
-        self.data = xmltodict.parse(self.response.text)
-
-    def raise_for_failure(self):
-        if not self.is_ok:
-            raise NetvisorError.from_status(self.statuses[1])
-
-    @property
-    def statuses(self):
-        return self.data['Root']['ResponseStatus']['Status']
-
-    @property
-    def is_ok(self):
-        return self.statuses == 'OK'

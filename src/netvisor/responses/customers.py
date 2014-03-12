@@ -1,13 +1,13 @@
-from ..transformers.customers import (
-    get_customer_response_transformer,
-    customer_list_response_transformer,
+from ..postprocessors.customers import (
+    get_customer_response_postprocessor,
+    customer_list_response_postprocessor,
 )
 from .base import Response
 
 
 class CustomerListResponse(Response):
-    transformer = customer_list_response_transformer
+    postprocessor = customer_list_response_postprocessor
 
 
 class GetCustomerResponse(Response):
-    transformer = get_customer_response_transformer
+    postprocessor = get_customer_response_postprocessor

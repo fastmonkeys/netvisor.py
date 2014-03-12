@@ -1,13 +1,13 @@
-from ..transformers.products import (
-    get_product_response_transformer,
-    product_list_response_transformer,
+from ..postprocessors.products import (
+    get_product_response_postprocessor,
+    product_list_response_postprocessor,
 )
 from .base import Response
 
 
 class ProductListResponse(Response):
-    transformer = product_list_response_transformer
+    postprocessor = product_list_response_postprocessor
 
 
 class GetProductResponse(Response):
-    transformer = get_product_response_transformer
+    postprocessor = get_product_response_postprocessor

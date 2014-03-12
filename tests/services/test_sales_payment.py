@@ -40,8 +40,6 @@ class TestSalesPaymentService(object):
                 'invoice_number': 2,
                 'bank_status': {
                     'is_ok': True,
-                    'error_code': u'',
-                    'error_description': u'',
                 }
             }
         ]

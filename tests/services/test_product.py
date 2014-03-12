@@ -45,6 +45,43 @@ class TestProductService(object):
             }
         }
 
+    def test_get_with_minimal_product(self, netvisor, responses):
+        responses.add(
+            method='GET',
+            url='http://koulutus.netvisor.fi/GetProduct.nv?id=165',
+            body=get_response_content('GetProductMinimal.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        product = netvisor.products.get(165)
+        assert product == {
+            'id': 165,
+            'code': u'CC',
+            'group': u'Kirjat',
+            'name': u'Code Complete',
+            'description': None,
+            'unit_price': decimal.Decimal('0'),
+            'unit_price_type': u'brutto',
+            'unit': None,
+            'unit_weight': None,
+            'purchase_price': decimal.Decimal('0'),
+            'tariff_heading': None,
+            'commission_percentage': decimal.Decimal('0'),
+            'is_active': False,
+            'is_sales_product': True,
+            'default_vat_percentage': decimal.Decimal('0'),
+            'default_domestic_account_number': u'3000',
+            'default_eu_account_number': u'3360',
+            'default_outside_eu_account_number': u'3380',
+            'inventory': {
+                'amount': decimal.Decimal('0'),
+                'mid_price': decimal.Decimal('0'),
+                'ordered_amount': decimal.Decimal('0'),
+                'reserved_amount': decimal.Decimal('0'),
+                'value': decimal.Decimal('0'),
+            }
+        }
+
     def test_get_raises_error_if_product_not_found(self, netvisor, responses):
         responses.add(
             method='GET',

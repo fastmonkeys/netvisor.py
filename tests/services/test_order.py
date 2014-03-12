@@ -24,7 +24,7 @@ class TestOrderService(object):
                 'number': 5,
                 'date': date(2013, 11, 9),
                 'status': u'open',
-                'substatus': u'',
+                'substatus': None,
                 'reference_number': u'1070',
                 'amount': decimal.Decimal('123.45'),
                 'open_amount': decimal.Decimal('45.67'),

@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 import os
 import re
 
@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_version():
-    filename = os.path.join(HERE, 'src', 'netvisor', '__init__.py')
+    filename = os.path.join(HERE, 'netvisor', '__init__.py')
     contents = open(filename).read()
     pattern = r"^__version__ = '(.*?)'$"
     return re.search(pattern, contents, re.MULTILINE).group(1)
@@ -27,9 +27,6 @@ setup(
     packages=['netvisor'],
     package_data={
         '': ['LICENSE']
-    },
-    package_dir={
-        '': 'src'
     },
     license=open('LICENSE').read(),
     platforms='any',

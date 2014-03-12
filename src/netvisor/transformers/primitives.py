@@ -42,6 +42,8 @@ class Flatten(object):
     def transform(self, obj):
         obj = obj.copy()
         dict_to_flatten = obj.pop(self.key_to_flatten, {})
+        if not hasattr(dict_to_flatten, 'iteritems'):
+            dict_to_flatten = {self.key_to_flatten: dict_to_flatten}
         for key, value in dict_to_flatten.iteritems():
             obj[key] = value
         return obj
@@ -90,7 +92,8 @@ class Listify(ValueTransformer):
 
 class NormalizeDecimalPoint(ValueTransformer):
     def transform_value(self, value):
-        return value.replace(',', '.')
+        if value:
+            return value.replace(',', '.')
 
 
 class NormalizeActivityStatus(ValueTransformer):
@@ -141,8 +144,10 @@ class Context(ValueTransformer):
                 self.transformer.transform(element)
                 for element in value
             ]
-        else:
+        elif isinstance(value, dict):
             return self.transformer.transform(value)
+        else:
+            return value
 
 
 class DeepKeyTransformer(object):

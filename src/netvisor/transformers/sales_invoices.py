@@ -25,21 +25,22 @@ sales_invoice_list_response_transformer = Chain([
         Chain([
             Rename('netvisor_key', 'id'),
             Rename('invoice_number', 'number'),
-            Rename('invoice_date', 'date'),
+            Rename('invoicedate', 'date'),
             Rename('invoice_sum', 'amount'),
             Rename('open_sum', 'open_amount'),
             Remove('customer_code'),
             Remove('customer_name'),
             Remove('uri'),
             FlattenText('date'),
+            Rename('invoice_status', 'status'),
             Context(
-                'invoice_status',
+                'status',
                 Chain([
                     Rename('#text', 'status'),
                     Rename('@substatus', 'substatus')
                 ])
             ),
-            Flatten('invoice_status'),
+            Flatten('status'),
             NormalizeDecimalPoint('amount'),
             NormalizeDecimalPoint('open_amount'),
         ])

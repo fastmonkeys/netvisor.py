@@ -117,6 +117,24 @@ class TestFlatten(_TestTransformer):
         }
 
 
+class TestFlattenString(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return Flatten('status')
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "status": "open"
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            "status": "open"
+        }
+
+
 class TestNest(_TestTransformer):
     @pytest.fixture
     def transformer(self):
@@ -411,6 +429,24 @@ class TestContextWithLists(_TestTransformer):
                     "product_group": "Kirjat"
                 },
             ]
+        }
+
+
+class TestContextWithStrings(_TestTransformer):
+    @pytest.fixture
+    def transformer(self):
+        return Context('product', Rename('product_code', 'code'))
+
+    @pytest.fixture
+    def data(self):
+        return {
+            "product": "CC"
+        }
+
+    @pytest.fixture
+    def expected(self):
+        return {
+            "product": "CC"
         }
 
 

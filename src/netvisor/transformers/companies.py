@@ -33,6 +33,7 @@ company_list_response_transformer = Chain([
 get_company_information_response_transformer = Chain([
     Underscore(),
     Flatten('root'),                   # REMOVE?
+    Remove('response_status'),         # REMOVE?
     Flatten('company_information'),    # REMOVE?
     Remove('netvisor_disclaimer'),     # REMOVE?
     Flatten('company'),                # REMOVE?

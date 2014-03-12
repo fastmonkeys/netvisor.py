@@ -28,25 +28,16 @@ class ProductListSchema(colander.Schema):
 
 class GetProductSchema(ProductListProductSchema):
     group = colander.SchemaNode(colander.String())
-    description = colander.SchemaNode(colander.String())
-    unit = colander.SchemaNode(colander.String())
-    unit_weight = colander.SchemaNode(colander.Decimal())
+    description = colander.SchemaNode(colander.String(), missing=u'')
+    unit = colander.SchemaNode(colander.String(), missing=u'')
+    unit_weight = colander.SchemaNode(colander.Decimal(), missing=None)
     purchase_price = colander.SchemaNode(colander.Decimal())
-    tariff_heading = colander.SchemaNode(colander.String())
+    tariff_heading = colander.SchemaNode(colander.String(), missing=u'')
     commission_percentage = colander.SchemaNode(colander.Decimal())
     is_active = colander.SchemaNode(colander.Boolean())
     is_sales_product = colander.SchemaNode(colander.Boolean())
     default_vat_percentage = colander.SchemaNode(colander.Decimal())
-    default_domestic_account_number = colander.SchemaNode(
-        colander.String(),
-        missing=u''
-    )
-    default_eu_account_number = colander.SchemaNode(
-        colander.String(),
-        missing=u''
-    )
-    default_outside_eu_account_number = colander.SchemaNode(
-        colander.String(),
-        missing=u''
-    )
+    default_domestic_account_number = colander.SchemaNode(colander.String())
+    default_eu_account_number = colander.SchemaNode(colander.String())
+    default_outside_eu_account_number = colander.SchemaNode(colander.String())
     inventory = InventorySchema()

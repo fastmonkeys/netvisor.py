@@ -5,6 +5,7 @@ from .primitives import (
     FlattenText,
     Listify,
     Nest,
+    NormalizeDecimalPoint,
     Rename,
     Remove,
     Underscore,
@@ -14,14 +15,14 @@ from .primitives import (
 customer_list_response_transformer = Chain([
     Underscore(),
     Flatten('root'),               # REMOVE?
-    Flatten('customer_list'),      # REMOVE?
+    Flatten('customerlist'),       # REMOVE?
     Remove('response_status'),     # REMOVE?
     Rename('customer', 'objects'),
     Listify('objects'),
     Context(
         'objects',
         Chain([
-            Rename('netvisor_key', 'id'),
+            Rename('netvisorkey', 'id'),
             Rename('organisation_identifier', 'business_code'),
             Remove('uri'),
         ])
@@ -44,6 +45,20 @@ get_customer_response_transformer = Chain([
     Rename('post_number', 'postal_code'),
     Rename('city', 'post_office'),
     FlattenText('country'),
+    Nest(
+        'group',
+        [
+            'customer_group_name',
+            'customer_group_netvisor_key',
+        ]
+    ),
+    Context(
+        'group',
+        Chain([
+            Rename('customer_group_netvisor_key', 'id'),
+            Rename('customer_group_name', 'name'),
+        ])
+    ),
     Nest(
         'street_address',
         [
@@ -81,4 +96,5 @@ get_customer_response_transformer = Chain([
         ])
     ),
     Flatten('customer_additional_information'),
+    NormalizeDecimalPoint('balance_limit'),
 ])

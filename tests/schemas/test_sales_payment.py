@@ -15,7 +15,7 @@ class TestSalesPaymentFromSalesPaymentListResponse(SchemaTestCase):
     schema_cls = SalesPaymentListSchema
 
     def test_has_one_sales_payment(self, data):
-        assert len(data['objects']) == 1
+        assert len(data['objects']) == 2
 
     @pytest.mark.parametrize(
         ('name', 'value'),
@@ -23,7 +23,7 @@ class TestSalesPaymentFromSalesPaymentListResponse(SchemaTestCase):
             ('id', 165),
             ('name', u'Matti Mallikas'),
             ('date', date(2014, 2, 7)),
-            ('amount', decimal.Decimal('250')),
+            ('amount', decimal.Decimal('249.90')),
             ('foreign_currency_amount', None),
             ('reference_number', u'1094'),
             ('invoice_number', 1),

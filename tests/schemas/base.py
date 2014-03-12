@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from netvisor.responses.companies import (
-    CompanyListResponse,
-    GetCompanyInformationResponse,
-)
 from ..utils import get_response_text
 
 
@@ -22,4 +18,4 @@ class SchemaTestCase(object):
     @pytest.fixture(scope='class')
     def data(self, raw_data):
         schema = self.__class__.schema_cls()
-        return  schema.deserialize(raw_data)
+        return schema.deserialize(raw_data)

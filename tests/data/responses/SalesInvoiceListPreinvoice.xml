@@ -9,7 +9,7 @@
       <NetvisorKey>165</NetvisorKey>
       <InvoiceNumber>5</InvoiceNumber>
       <Invoicedate format="ansi">2013-11-09</Invoicedate>
-      <InvoiceStatus substatus="overdue">open</InvoiceStatus>
+      <InvoiceStatus>open</InvoiceStatus>
       <CustomerCode>MM</CustomerCode>
       <CustomerName>Matti Meikäläinen</CustomerName>
       <ReferenceNumber>1070</ReferenceNumber>

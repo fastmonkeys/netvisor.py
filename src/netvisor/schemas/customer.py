@@ -4,9 +4,14 @@ import colander
 from .address import AddressSchema
 
 
+class CustomerGroup(colander.Schema):
+    id = colander.SchemaNode(colander.Int())
+    name = colander.SchemaNode(colander.String())
+
+
 class FinvoiceSchema(colander.Schema):
-    router_code = colander.SchemaNode(colander.String())
-    address = colander.SchemaNode(colander.String())
+    router_code = colander.SchemaNode(colander.String(), missing=u'')
+    address = colander.SchemaNode(colander.String(), missing=u'')
 
 
 class ContactPersonSchema(colander.Schema):
@@ -33,6 +38,7 @@ class CustomerListSchema(colander.Schema):
 class GetCustomerSchema(colander.Schema):
     name = colander.SchemaNode(colander.String())
     name_extension = colander.SchemaNode(colander.String(), missing=u'')
+    group = CustomerGroup()
     code = colander.SchemaNode(colander.String(), missing=u'')
     business_code = colander.SchemaNode(colander.String(), missing=u'')
     phone = colander.SchemaNode(colander.String(), missing=u'')
@@ -45,3 +51,5 @@ class GetCustomerSchema(colander.Schema):
     delivery_address = AddressSchema()
     finvoice = FinvoiceSchema()
     contact_person = ContactPersonSchema()
+    is_active = colander.SchemaNode(colander.Boolean())
+    balance_limit = colander.SchemaNode(colander.Decimal(), missing=None)

@@ -17,6 +17,12 @@ def test_customer_list_response():
                 'name': u'Anni Asiakas',
                 'code': u'AA',
                 'business_code': u'12345678-9',
+            },
+            {
+                'id': u'166',
+                'name': u'Matti Mallikas',
+                'code': None,
+                'business_code': None,
             }
         ]
     }
@@ -27,17 +33,17 @@ def test_get_customer_response():
     response = GetCustomerResponse(xml)
     assert response.parse() == {
         'code': u'MM',
-        'business_code': None,
+        'business_code': u'1234567-8',
         'name': u'Maija Mallikas',
-        'name_extension': None,
+        'name_extension': u'toimitusjohtaja',
         'street_address': {
             'street': u'Pajukuja 2',
             'postal_code': u'53100',
             'post_office': u'Lappeenranta',
-            'country': u'AF',
+            'country': u'FI',
         },
         'phone': u'040 12157 988',
-        'fax': None,
+        'fax': u'(015) 123 4567',
         'email': u'maija.mallikas@netvisor.fi',
         'homepage': u'www.netvisor.fi',
         'finvoice': {
@@ -52,9 +58,15 @@ def test_get_customer_response():
         },
         'contact_person': {
             'name': u'Perttu',
-            'email': None,
+            'email': u'perttu@netvisor.fi',
             'phone': u'040 21578 999',
         },
-        'comment': None,
-        'reference_number': u'1070'
+        'comment': u'Great customer!',
+        'reference_number': u'1070',
+        'is_active': u'1',
+        'balance_limit': u'200.3',
+        'group': {
+            'id': u'1',
+            'name': u'Asiakasryhmä 1',
+        }
     }

@@ -50,7 +50,11 @@ get_product_response_transformer = Chain([
     Rename('comission_percentage', 'commission_percentage'),
     Rename('product_inventory_details', 'inventory'),
     Rename('default_vat_percent', 'default_vat_percentage'),
+    NormalizeDecimalPoint('commission_percentage'),
+    NormalizeDecimalPoint('default_vat_percentage'),
+    NormalizeDecimalPoint('purchase_price'),
     NormalizeDecimalPoint('unit_price'),
+    NormalizeDecimalPoint('unit_weight'),
     Context(
         'inventory',
         Chain([

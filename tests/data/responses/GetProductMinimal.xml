@@ -10,27 +10,27 @@
       <ProductCode>CC</ProductCode>
       <ProductGroup>Kirjat</ProductGroup>
       <Name>Code Complete</Name>
-      <Description>Toinen painos</Description>
-      <UnitPrice Type="brutto">42,5</UnitPrice>
-      <Unit>kpl</Unit>
-      <UnitWeight>0,2</UnitWeight>
-      <PurchasePrice>25,0000</PurchasePrice>
-      <TariffHeading>Code Complete</TariffHeading>
-      <ComissionPercentage>11,0</ComissionPercentage>
-      <IsActive>1</IsActive>
-      <IsSalesProduct>0</IsSalesProduct>
+      <Description></Description>
+      <UnitPrice Type="brutto">0,0000</UnitPrice>
+      <Unit></Unit>
+      <UnitWeight></UnitWeight>
+      <PurchasePrice>0,0000</PurchasePrice>
+      <TariffHeading></TariffHeading>
+      <ComissionPercentage>0</ComissionPercentage>
+      <IsActive>0</IsActive>
+      <IsSalesProduct>1</IsSalesProduct>
     </ProductBaseInformation>
     <ProductBookKeepingDetails>
-      <DefaultVatPercent>22,0</DefaultVatPercent>
+      <DefaultVatPercent>0</DefaultVatPercent>
       <DefaultDomesticAccountNumber>3000</DefaultDomesticAccountNumber>
       <DefaultEuAccountNumber>3360</DefaultEuAccountNumber>
       <DefaultOutsideEUAccountNumber>3380</DefaultOutsideEUAccountNumber>
     </ProductBookKeepingDetails>
     <ProductInventoryDetails>
-      <InventoryAmount>2,00</InventoryAmount>
-      <InventoryMidPrice>5,00</InventoryMidPrice>
-      <InventoryValue>10,0000</InventoryValue>
-      <InventoryReservedAmount>1,00</InventoryReservedAmount>
+      <InventoryAmount>0,00</InventoryAmount>
+      <InventoryMidPrice>0,0000</InventoryMidPrice>
+      <InventoryValue>0,00</InventoryValue>
+      <InventoryReservedAmount>0,00</InventoryReservedAmount>
       <InventoryOrderedAmount>0,00</InventoryOrderedAmount>
     </ProductInventoryDetails>
   </Product>

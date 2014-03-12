@@ -7,17 +7,20 @@
   <Customer>
     <CustomerBaseInformation>
       <InternalIdentifier>MM</InternalIdentifier>
-      <ExternalIdentifier />
+      <ExternalIdentifier>1234567-8</ExternalIdentifier>
+      <CustomerGroupNetvisorKey>1</CustomerGroupNetvisorKey>
+      <CustomerGroupName>Asiakasryhmä 1</CustomerGroupName>
       <Name>Maija Mallikas</Name>
-      <NameExtension />
+      <NameExtension>toimitusjohtaja</NameExtension>
       <StreetAddress>Pajukuja 2</StreetAddress>
       <City>Lappeenranta</City>
       <PostNumber>53100</PostNumber>
-      <Country type="ISO-3166">AF</Country>
+      <Country type="ISO-3166">FI</Country>
       <PhoneNumber>040 12157 988</PhoneNumber>
-      <FaxNumber />
+      <FaxNumber>(015) 123 4567</FaxNumber>
       <Email>maija.mallikas@netvisor.fi</Email>
       <HomePageUri>www.netvisor.fi</HomePageUri>
+      <IsActive>1</IsActive>
     </CustomerBaseInformation>
     <CustomerFinvoiceDetails>
       <FinvoiceAddress>FI002316574613249</FinvoiceAddress>
@@ -31,12 +34,13 @@
     </CustomerDeliveryDetails>
     <CustomerContactDetails>
       <ContactPerson>Perttu</ContactPerson>
-      <ContactPersonEmail />
+      <ContactPersonEmail>perttu@netvisor.fi</ContactPersonEmail>
       <ContactPersonPhone>040 21578 999</ContactPersonPhone>
     </CustomerContactDetails>
     <CustomerAdditionalInformation>
-      <Comment />
+      <Comment>Great customer!</Comment>
       <ReferenceNumber>1070</ReferenceNumber>
+      <BalanceLimit>200,3</BalanceLimit>
     </CustomerAdditionalInformation>
   </Customer>
 </Root>

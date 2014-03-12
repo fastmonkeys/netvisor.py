@@ -27,7 +27,7 @@ class SalesInvoiceListSalesInvoiceSchema(colander.Schema):
     number = colander.SchemaNode(colander.Int())
     date = colander.SchemaNode(colander.Date())
     status = colander.SchemaNode(colander.String())
-    substatus = colander.SchemaNode(colander.String())
+    substatus = colander.SchemaNode(colander.String(), missing=u'')
     reference_number = colander.SchemaNode(colander.String())
     amount = colander.SchemaNode(colander.Decimal())
     open_amount = colander.SchemaNode(colander.Decimal())
@@ -50,7 +50,10 @@ class GetSalesInvoiceSchema(colander.Schema):
     amount = colander.SchemaNode(colander.Decimal())
     seller = colander.SchemaNode(colander.String())
     status = colander.SchemaNode(colander.String())
-    free_text_before_lines = colander.SchemaNode(colander.String(), missing=u'')
+    free_text_before_lines = colander.SchemaNode(
+        colander.String(),
+        missing=u''
+    )
     free_text_after_lines = colander.SchemaNode(colander.String(), missing=u'')
     our_reference = colander.SchemaNode(colander.String(), missing=u'')
     your_reference = colander.SchemaNode(colander.String(), missing=u'')

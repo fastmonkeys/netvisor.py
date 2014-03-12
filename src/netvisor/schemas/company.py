@@ -61,7 +61,10 @@ class GetCompanyInformationSchema(CompanyListCompanySchema):
     established_date = colander.SchemaNode(colander.Date())
     terminated_date = colander.SchemaNode(colander.Date())
     most_recent_change_date = colander.SchemaNode(colander.Date())
-    current_special_status = colander.SchemaNode(colander.String(), missing=u'')
+    current_special_status = colander.SchemaNode(
+        colander.String(),
+        missing=u''
+    )
     domicile = colander.SchemaNode(colander.String())
     activity_description = colander.SchemaNode(colander.String())
     email = colander.SchemaNode(colander.String())

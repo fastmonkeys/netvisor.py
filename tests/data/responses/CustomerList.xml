@@ -4,13 +4,20 @@
     <Status>OK</Status>
     <Timestamp>1.10.2009 16:03:24</Timestamp>
   </ResponseStatus>
-  <CustomerList>
+  <Customerlist>
     <Customer>
-      <NetvisorKey>165</NetvisorKey>
+      <Netvisorkey>165</Netvisorkey>
       <Name>Anni Asiakas</Name>
       <Code>AA</Code>
       <OrganisationIdentifier>12345678-9</OrganisationIdentifier>
       <Uri>http://koulutus.netvisor.fi/getcustomer.nv?id=165</Uri>
     </Customer>
-  </CustomerList>
+    <Customer>
+      <Netvisorkey>166</Netvisorkey>
+      <Name>Matti Mallikas</Name>
+      <Code></Code>
+      <OrganisationIdentifier></OrganisationIdentifier>
+      <Uri>http://koulutus.netvisor.fi/getcustomer.nv?id=166</Uri>
+    </Customer>
+  </Customerlist>
 </Root>

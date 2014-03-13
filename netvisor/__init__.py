@@ -9,4 +9,4 @@
 
 __version__ = '0.1.0-dev'
 
-from .core import Netvisor
+from .core import Netvisor  # flake8: noqa

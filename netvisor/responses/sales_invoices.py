@@ -39,7 +39,11 @@ class SalesInvoiceListResponse(Response):
         Rename('invoice_status', 'status'),
         Context(
             ['Root', 'SalesInvoiceList', 'SalesInvoice', 'InvoiceStatus'],
-            ExtractAttribute(key='status', attr='substatus', cdata_key='status')
+            ExtractAttribute(
+                key='status',
+                attr='substatus',
+                cdata_key='status'
+            )
         ),
         Flatten('status'),
         Date('date'),
@@ -82,7 +86,10 @@ class GetSalesInvoiceResponse(Response):
         Rename('sales_invoice_referencenumber', 'reference_number'),
         Rename('sales_invoice_amount', 'amount'),
         Rename('sales_invoice_free_text_after_lines', 'free_text_after_lines'),
-        Rename('sales_invoice_free_text_before_lines', 'free_text_before_lines'),
+        Rename(
+            'sales_invoice_free_text_before_lines',
+            'free_text_before_lines'
+        ),
         Rename('sales_invoice_private_comment', 'private_comment'),
         Rename('seller_identifier', 'seller'),
         Rename('invoice_status', 'status'),

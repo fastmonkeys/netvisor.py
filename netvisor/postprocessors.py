@@ -38,7 +38,7 @@ class Flatten(object):
 
     def _flatten(self, data):
         dict_to_flatten = data.pop(self.key_to_flatten)
-        for key, value in dict_to_flatten.iteritems():
+        for key, value in dict_to_flatten.items():
             data[key] = value
 
     def _can_flatten(self, data):
@@ -62,7 +62,7 @@ class Nest(object):
     def _nest(self, data):
         nested_obj = {
             key: data.pop(value)
-            for key, value in self.keys_to_nest.iteritems()
+            for key, value in self.keys_to_nest.items()
             if value in data
         }
         if nested_obj:

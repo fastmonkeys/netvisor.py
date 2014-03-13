@@ -3,7 +3,7 @@
     netvisor
     ~~~~~~~~
 
-    :copyright: (c) 2013 by Janne Vanhala.
+    :copyright: (c) 2013-2014 by Janne Vanhala.
     :license: MIT, see LICENSE for more details.
 """
 

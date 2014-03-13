@@ -41,7 +41,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Netvisor Python API wrapper'
-copyright = u'2013, Janne Vanhala'
+copyright = u'2013-2014, Janne Vanhala'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

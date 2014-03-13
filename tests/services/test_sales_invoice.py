@@ -2,6 +2,9 @@
 from datetime import date
 import decimal
 
+import pytest
+
+from netvisor.exc import InvalidData
 from ..utils import get_response_content
 
 
@@ -67,6 +70,27 @@ class TestSalesInvoiceService(object):
                 },
             ]
         }
+
+    def test_get_raises_error_if_sales_invoice_not_found(
+        self, netvisor, responses
+    ):
+        responses.add(
+            method='GET',
+            url=(
+                'http://koulutus.netvisor.fi/GetSalesInvoice.nv?'
+                'NetvisorKey=123'
+            ),
+            body=get_response_content('GetSalesInvoiceNotFound.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        with pytest.raises(InvalidData) as excinfo:
+            netvisor.sales_invoices.get(123)
+
+        assert str(excinfo.value) == (
+            'Data form incorrect:. '
+            'Sales invoice not found with Netvisor identifier: 123'
+        )
 
     def test_list(self, netvisor, responses):
         responses.add(

@@ -5,6 +5,8 @@
     :copyright: (c) 2013 by Janne Vanhala.
     :license: BSD, see LICENSE for more details.
 """
+from __future__ import absolute_import
+
 import requests
 
 
@@ -14,12 +16,6 @@ class Client(object):
         self.host = host
         self.requester = requests.Session()
         self.requester.auth = auth
-
-    def get(self, path, **kwargs):
-        return self.request('GET', path, **kwargs)
-
-    def post(self, path, **kwargs):
-        return self.request('POST', path, **kwargs)
 
     def request(self, method, path, **kwargs):
         url = self.make_url(path)

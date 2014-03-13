@@ -23,7 +23,7 @@ class Response(object):
 
     @property
     def statuses(self):
-        return self.data['Root']['ResponseStatus']['Status']
+        return self.data['root']['response_status']['status']
 
     @property
     def is_ok(self):

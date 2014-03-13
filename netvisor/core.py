@@ -1,13 +1,10 @@
 from .auth import NetvisorAuth
 from .client import Client
-from .services import (
-    CompanyService,
-    CustomerService,
-    OrderService,
-    ProductService,
-    SalesInvoiceService,
-    SalesPaymentService,
-)
+from .services.company import CompanyService
+from .services.customer import CustomerService
+from .services.product import ProductService
+from .services.sales_invoice import SalesInvoiceService
+from .services.sales_payment import SalesPaymentService
 
 
 class Netvisor(object):
@@ -22,7 +19,6 @@ class Netvisor(object):
     def _init_services(self):
         self.companies = CompanyService(self._client)
         self.customers = CustomerService(self._client)
-        self.orders = OrderService(self._client)
         self.products = ProductService(self._client)
         self.sales_invoices = SalesInvoiceService(self._client)
         self.sales_payments = SalesPaymentService(self._client)

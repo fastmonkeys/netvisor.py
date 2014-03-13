@@ -6,6 +6,7 @@
     :copyright: (c) 2013 by Janne Vanhala.
     :license: BSD, see LICENSE for more details.
 """
+from __future__ import absolute_import
 
 import datetime
 import hashlib

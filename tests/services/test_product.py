@@ -95,7 +95,7 @@ class TestProductService(object):
 
         assert str(excinfo.value) == (
             'Data form incorrect:. '
-            'Customer not found with Netvisor identifier: 123'
+            'Product not found with Netvisor identifier: 123'
         )
 
     def test_list(self, netvisor, responses):

@@ -22,8 +22,8 @@ setup(
         open('CHANGES.rst').read()
     ),
     author='Janne Vanhala',
-    author_email='janne.vanhala@gmail.com',
-    url='http://github.com/jpvanhal/python-netvisor',
+    author_email='janne@fastmonkeys.com',
+    url='http://github.com/fastmonkeys/netvisor.py',
     packages=['netvisor'],
     package_data={
         '': ['LICENSE']

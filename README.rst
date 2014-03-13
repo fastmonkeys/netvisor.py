@@ -1,8 +1,8 @@
 Netvisor: Python API wrapper
 ============================
 
-.. image:: https://secure.travis-ci.org/jpvanhal/python-netvisor.png?branch=master
-   :target: http://travis-ci.org/jpvanhal/python-netvisor
+.. image:: https://secure.travis-ci.org/fastmonkeys/netvisor.py.png?branch=master
+   :target: http://travis-ci.org/fastmonkeys/netvisor.py
 
 This is an Python wrapper for the Netvisor API.
 
@@ -17,6 +17,6 @@ Resources
 ---------
 
 * `Documentation <http://netvisor.readthedocs.org>`_
-* `Bug Tracker <http://github.com/jpvanhal/netvisor/issues>`_
-* `Code <http://github.com/jpvanhal/netvisor>`_
-* `Development Version <http://github.com/jpvanhal/netvisor/zipball/master#egg=netvisor-dev>`_
+* `Bug Tracker <http://github.com/fastmonkeys/netvisor.py/issues>`_
+* `Code <http://github.com/fastmonkeys/netvisor.py>`_
+* `Development Version <http://github.com/fastmonkeys/netvisor.py/zipball/master#egg=netvisor-dev>`_

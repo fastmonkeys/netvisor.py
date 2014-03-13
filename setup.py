@@ -38,6 +38,7 @@ setup(
     install_requires=[
         'inflection',
         'requests',
+        'xmltodict',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

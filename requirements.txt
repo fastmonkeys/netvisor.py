@@ -1,3 +1,4 @@
 flexmock
 freezegun
 pytest
+responses

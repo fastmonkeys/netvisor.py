@@ -24,7 +24,12 @@ setup(
     author='Janne Vanhala',
     author_email='janne@fastmonkeys.com',
     url='http://github.com/fastmonkeys/netvisor.py',
-    packages=['netvisor'],
+    packages=[
+        'netvisor',
+        'netvisor.requests',
+        'netvisor.responses',
+        'netvisor.services',
+    ],
     package_data={
         '': ['LICENSE']
     },

@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+    netvisor.postprocessors
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from datetime import datetime
 import decimal
 

@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.responses.base
+    ~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 import xmltodict
 
 from ..exc import NetvisorError

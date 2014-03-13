@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.core
+    ~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from .auth import NetvisorAuth
 from .client import Client
 from .services.company import CompanyService

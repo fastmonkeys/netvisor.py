@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.exc
+    ~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
+
+
 class NetvisorError(Exception):
 
     @staticmethod

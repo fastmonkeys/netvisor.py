@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.requests.product
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from .base import Request
 from ..exc import InvalidData
 from ..responses.products import GetProductResponse, ProductListResponse

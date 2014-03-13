@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.requests.company
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from .base import Request
 from ..responses.companies import (
     CompanyListResponse,

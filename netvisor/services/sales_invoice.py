@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+    netvisor.services.sales_invoice
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from .base import Service
 from ..requests.sales_invoice import (
     GetSalesInvoiceRequest,

@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+    netvisor.responses.sales_invoices
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :license: MIT, see LICENSE for more details.
+"""
 from ..postprocessors import (
     Boolean,
     Chain,

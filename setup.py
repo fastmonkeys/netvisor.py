@@ -36,6 +36,7 @@ setup(
     license=open('LICENSE').read(),
     platforms='any',
     install_requires=[
+        'inflection',
         'requests',
     ],
     classifiers=[

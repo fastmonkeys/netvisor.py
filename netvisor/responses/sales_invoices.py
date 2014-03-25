@@ -33,10 +33,15 @@ class SalesInvoiceListResponse(Response):
         Rename('invoicedate', 'date'),
         Rename('invoice_sum', 'amount'),
         Rename('open_sum', 'open_amount'),
-        Remove('customer_code'),
-        Remove('customer_name'),
         Remove('uri'),
         Rename('invoice_status', 'status'),
+        Nest(
+            'customer',
+            {
+                'name': 'customer_name',
+                'code': 'customer_code'
+            }
+        ),
         Context(
             ['Root', 'SalesInvoiceList', 'SalesInvoice', 'InvoiceStatus'],
             ExtractAttribute(

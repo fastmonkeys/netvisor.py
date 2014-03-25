@@ -111,6 +111,10 @@ class TestSalesInvoiceService(object):
                 'reference_number': u'1070',
                 'amount': decimal.Decimal('123.45'),
                 'open_amount': decimal.Decimal('45.67'),
+                'customer': {
+                    'code': u'MM',
+                    'name': u'Matti Meikäläinen',
+                }
             }
         ]
 

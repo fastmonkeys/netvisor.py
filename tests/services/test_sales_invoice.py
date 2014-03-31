@@ -54,7 +54,7 @@ class TestSalesInvoiceService(object):
             'payment_term_cash_discount': decimal.Decimal('9'),
             'lines': [
                 {
-                    'product_code': u'PELSU',
+                    'product_code': u'OMENA',
                     'name': u'Omena',
                     'free_text': None,
                     'quantity': decimal.Decimal('2'),
@@ -68,6 +68,21 @@ class TestSalesInvoiceService(object):
                     'amount': decimal.Decimal('16.84'),
                     'accounting_suggestion': u'551',
                 },
+                {
+                    'product_code': u'BANAANI',
+                    'name': u'Banaani',
+                    'free_text': None,
+                    'quantity': decimal.Decimal('1'),
+                    'unit_price': decimal.Decimal('2.4900'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'vat': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': u'KOMY',
+                        'amount': decimal.Decimal('0.5478'),
+                    },
+                    'amount': decimal.Decimal('3.0378'),
+                    'accounting_suggestion': u'551'
+                }
             ]
         }
 

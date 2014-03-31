@@ -37,7 +37,7 @@
     <InvoiceLines>
       <InvoiceLine>
         <SalesInvoiceProductLine>
-          <productidentifier type="customer">PELSU</productidentifier>
+          <productidentifier type="customer">OMENA</productidentifier>
           <ProductName>Omena</ProductName>
           <ProductUnitPrice>6,9000</ProductUnitPrice>
           <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
@@ -46,6 +46,18 @@
           <SalesInvoiceProductLineFreeText />
           <SalesInvoiceProductLineVatSum>3,04</SalesInvoiceProductLineVatSum>
           <SalesInvoiceProductLineSum>16,84</SalesInvoiceProductLineSum>
+          <AccountingAccountSuggestion>551</AccountingAccountSuggestion>
+        </SalesInvoiceProductLine>
+        <SalesInvoiceProductLine>
+          <productidentifier type="customer">BANAANI</productidentifier>
+          <ProductName>Banaani</ProductName>
+          <ProductUnitPrice>2,4900</ProductUnitPrice>
+          <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
+          <SalesInvoiceProductLineQuantity>1</SalesInvoiceProductLineQuantity>
+          <SalesInvoiceProductLineDiscountPercentage>0</SalesInvoiceProductLineDiscountPercentage>
+          <SalesInvoiceProductLineFreeText />
+          <SalesInvoiceProductLineVatSum>0,5478</SalesInvoiceProductLineVatSum>
+          <SalesInvoiceProductLineSum>3,0378</SalesInvoiceProductLineSum>
           <AccountingAccountSuggestion>551</AccountingAccountSuggestion>
         </SalesInvoiceProductLine>
       </InvoiceLine>

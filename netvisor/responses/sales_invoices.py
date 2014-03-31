@@ -127,9 +127,9 @@ class GetSalesInvoiceResponse(Response):
         Integer('number'),
         Integer('payment_term_cash_discount_days'),
         Integer('payment_term_net_days'),
-        Listify('invoice_lines', 'invoice_line'),
-        Rename('invoice_lines', 'lines'),
-        Flatten('sales_invoice_product_line'),
+        Listify('invoice_line', 'sales_invoice_product_line'),
+        Flatten('invoice_lines'),
+        Rename('invoice_line', 'lines'),
         ExtractAttribute(
             key='product_vat_percentage',
             attr='vatcode',

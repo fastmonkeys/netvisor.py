@@ -18,6 +18,9 @@ class SalesInvoiceService(Service):
         request = GetSalesInvoiceRequest(self.client, NetvisorKey=id)
         return request.make_request()
 
-    def list(self):
-        request = SalesInvoiceListRequest(self.client)
+    def list(self, above_id=None):
+        request = SalesInvoiceListRequest(
+            self.client,
+            InvoicesAboveNetvisorKey=above_id
+        )
         return request.make_request()

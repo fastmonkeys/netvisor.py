@@ -143,3 +143,17 @@ class TestSalesInvoiceService(object):
         )
         sales_invoices = netvisor.sales_invoices.list()
         assert sales_invoices == []
+
+    def test_list_with_above_id(self, netvisor, responses):
+        responses.add(
+            method='GET',
+            url=(
+                'http://koulutus.netvisor.fi/SalesInvoiceList.nv?'
+                'InvoicesAboveNetvisorKey=1000'
+            ),
+            body=get_response_content('SalesInvoiceListEmpty.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        sales_invoices = netvisor.sales_invoices.list(above_id=1000)
+        assert sales_invoices == []

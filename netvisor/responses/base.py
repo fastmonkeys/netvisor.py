@@ -22,7 +22,8 @@ class Response(object):
         return xmltodict.parse(
             self.response.text,
             postprocessor=self.postprocessor,
-            xml_attribs=False
+            xml_attribs=False,
+            dict_constructor=dict
         )
 
     def raise_for_failure(self):

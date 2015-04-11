@@ -4,7 +4,7 @@ Netvisor: Python API wrapper
 .. image:: https://secure.travis-ci.org/fastmonkeys/netvisor.py.png?branch=master
    :target: http://travis-ci.org/fastmonkeys/netvisor.py
 
-This is an Python wrapper for the Netvisor API.
+This is a Python wrapper for the Netvisor API.
 
 Installation
 ------------

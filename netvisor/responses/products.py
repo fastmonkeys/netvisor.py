@@ -16,7 +16,7 @@ from ..postprocessors import (
     Listify,
     Remove,
     Rename,
-    Underscore,
+    Underscore
 )
 from .base import Response
 

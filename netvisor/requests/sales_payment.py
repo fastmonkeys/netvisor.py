@@ -6,8 +6,8 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..responses.sales_payments import SalesPaymentListResponse
+from .base import Request
 
 
 class SalesPaymentListRequest(Request):

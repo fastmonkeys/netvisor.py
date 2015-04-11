@@ -6,8 +6,8 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from datetime import datetime
 import decimal
+from datetime import datetime
 
 import inflection
 

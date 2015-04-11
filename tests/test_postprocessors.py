@@ -1,5 +1,5 @@
-from datetime import date
 import decimal
+from datetime import date
 
 import pytest
 import xmltodict
@@ -10,14 +10,14 @@ from netvisor.postprocessors import (
     Context,
     Date,
     Decimal,
+    ExtractAttribute,
     Flatten,
     Integer,
     Listify,
     Nest,
     Remove,
     Rename,
-    Underscore,
-    ExtractAttribute,
+    Underscore
 )
 
 

@@ -6,8 +6,8 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..responses.customers import CustomerListResponse, GetCustomerResponse
+from .base import Request
 
 
 class GetCustomerRequest(Request):

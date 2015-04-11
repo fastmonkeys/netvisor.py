@@ -4,6 +4,7 @@ import decimal
 import pytest
 
 from netvisor.exc import InvalidData
+
 from ..utils import get_response_content
 
 

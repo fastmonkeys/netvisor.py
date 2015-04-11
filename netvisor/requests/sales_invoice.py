@@ -6,12 +6,12 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..exc import InvalidData
 from ..responses.sales_invoices import (
     GetSalesInvoiceResponse,
-    SalesInvoiceListResponse,
+    SalesInvoiceListResponse
 )
+from .base import Request
 
 
 class GetSalesInvoiceRequest(Request):

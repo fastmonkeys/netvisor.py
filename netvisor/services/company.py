@@ -6,8 +6,8 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
+from ..requests.company import CompanyListRequest, GetCompanyInformationRequest
 from .base import Service
-from ..requests.company import GetCompanyInformationRequest, CompanyListRequest
 
 
 class CompanyService(Service):

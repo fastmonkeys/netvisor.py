@@ -6,9 +6,9 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..exc import InvalidData
 from ..responses.products import GetProductResponse, ProductListResponse
+from .base import Request
 
 
 class GetProductRequest(Request):

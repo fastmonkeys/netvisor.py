@@ -9,7 +9,7 @@
 
 
 class Request(object):
-    def __init__(self, client, **params):
+    def __init__(self, client, params=None):
         self.client = client
         self.params = params
 

@@ -12,9 +12,9 @@ from ..requests.customer import GetCustomerRequest, CustomerListRequest
 
 class CustomerService(Service):
     def get(self, id):
-        request = GetCustomerRequest(self.client, id=id)
+        request = GetCustomerRequest(self.client, params={'id': id})
         return request.make_request()
 
     def list(self, query=None):
-        request = CustomerListRequest(self.client, Keyword=query)
+        request = CustomerListRequest(self.client, params={'Keyword': query})
         return request.make_request()

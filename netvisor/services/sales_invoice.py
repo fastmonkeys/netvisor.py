@@ -15,13 +15,18 @@ from ..requests.sales_invoice import (
 
 class SalesInvoiceService(Service):
     def get(self, id):
-        request = GetSalesInvoiceRequest(self.client, NetvisorKey=id)
+        request = GetSalesInvoiceRequest(
+            self.client,
+            params={'NetvisorKey': id}
+        )
         return request.make_request()
 
     def list(self, above_id=None, invoice_number=None):
         request = SalesInvoiceListRequest(
             self.client,
-            InvoicesAboveNetvisorKey=above_id,
-            InvoiceNumber=invoice_number
+            params={
+                'InvoicesAboveNetvisorKey': above_id,
+                'InvoiceNumber': invoice_number
+            }
         )
         return request.make_request()

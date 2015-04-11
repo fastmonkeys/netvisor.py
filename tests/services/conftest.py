@@ -20,8 +20,6 @@ def netvisor():
 
 @pytest.yield_fixture(autouse=True)
 def responses():
-    requests_mock = RequestsMock()
-    requests_mock._start()
-    yield requests_mock
-    requests_mock._stop()
-    requests_mock.reset()
+    r = RequestsMock()
+    with r:
+        yield r

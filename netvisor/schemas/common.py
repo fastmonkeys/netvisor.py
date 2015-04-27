@@ -6,9 +6,17 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, ValidationError, fields, pre_dump
 
 from .fields import Decimal
+
+
+class RejectUnknownFieldsSchema(Schema):
+    @pre_dump
+    def check_unknown_fields(self, data):
+        for k in data:
+            if k not in self.fields:
+                raise ValidationError("Unknown field name: '{}'".format(k))
 
 
 class DateSchema(Schema):

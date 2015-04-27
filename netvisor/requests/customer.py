@@ -6,7 +6,12 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from ..responses.customers import CustomerListResponse, GetCustomerResponse
+from ..responses.customers import (
+    CreateCustomerResponse,
+    CustomerListResponse,
+    GetCustomerResponse
+)
+from ..schemas import CreateCustomerSchema
 from .base import Request
 
 
@@ -20,3 +25,11 @@ class CustomerListRequest(Request):
     method = 'GET'
     uri = 'CustomerList.nv'
     response_cls = CustomerListResponse
+
+
+class CreateCustomerRequest(Request):
+    method = 'POST'
+    uri = 'Customer.nv'
+    response_cls = CreateCustomerResponse
+    schema_cls = CreateCustomerSchema
+    tag_name = 'customer'

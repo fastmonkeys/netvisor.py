@@ -6,7 +6,7 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from ..schemas import CustomerListSchema, GetCustomerSchema
+from ..schemas import CustomerListSchema, GetCustomerSchema, RepliesSchema
 from .base import Response
 
 
@@ -18,3 +18,8 @@ class CustomerListResponse(Response):
 class GetCustomerResponse(Response):
     schema_cls = GetCustomerSchema
     tag_name = 'customer'
+
+
+class CreateCustomerResponse(Response):
+    schema_cls = RepliesSchema
+    tag_name = 'replies'

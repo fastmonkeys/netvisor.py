@@ -9,7 +9,8 @@
 from ..requests.customer import (
     CreateCustomerRequest,
     CustomerListRequest,
-    GetCustomerRequest
+    GetCustomerRequest,
+    UpdateCustomerRequest
 )
 from .base import Service
 
@@ -23,10 +24,18 @@ class CustomerService(Service):
         request = CustomerListRequest(self.client, params={'Keyword': query})
         return request.make_request()
 
-    def create(self, customer):
+    def create(self, data):
         request = CreateCustomerRequest(
             self.client,
             params={'method': 'add'},
-            data=customer
+            data=data
+        )
+        return request.make_request()
+
+    def update(self, id, data):
+        request = UpdateCustomerRequest(
+            self.client,
+            params={'id': id, 'method': 'edit'},
+            data=data
         )
         return request.make_request()

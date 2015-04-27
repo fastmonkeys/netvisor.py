@@ -187,7 +187,7 @@ class TestCustomerService(object):
         responses.add(
             method='POST',
             url='http://koulutus.netvisor.fi/Customer.nv?method=add',
-            body=get_response_content('Customer.xml'),
+            body=get_response_content('CustomerCreate.xml'),
             content_type='text/html; charset=utf-8',
             match_querystring=True
         )
@@ -238,7 +238,7 @@ class TestCustomerService(object):
         responses.add(
             method='POST',
             url='http://koulutus.netvisor.fi/Customer.nv?method=add',
-            body=get_response_content('Customer.xml'),
+            body=get_response_content('CustomerCreate.xml'),
             content_type='text/html; charset=utf-8',
             match_querystring=True
         )
@@ -262,3 +262,54 @@ class TestCustomerService(object):
     def test_create_with_unknown_fields(self, netvisor, responses, data):
         with pytest.raises(ValidationError):
             netvisor.customers.create(data)
+
+    def test_update(self, netvisor, responses):
+        responses.add(
+            method='POST',
+            url='http://koulutus.netvisor.fi/Customer.nv?method=edit&id=8',
+            body=get_response_content('CustomerEdit.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        data = {
+            'customer_base_information': {
+                'internal_identifier': u'MM',
+                'external_identifier': u'1967543-8',
+                'name': u'Matti Meikäläinen',
+                'name_extension': u'Toimitusjohtaja',
+                'street_address': u'Pajukuja 1',
+                'city': u'Lappeenranta',
+                'post_number': u'53100',
+                'country': u'FI',
+                'customer_group_name': u'Alennusasiakkaat',
+                'phone_number': u'040 123456',
+                'fax_number': u'05 123456',
+                'email': u'matti.meikalainen@firma.fi',
+                'home_page_uri': u'www.firma.fi',
+                'is_active': True,
+            },
+            'customer_finvoice_details': {
+                'finvoice_address': u'FI109700021497',
+                'finvoice_router_code':  'NDEAFIHH'
+            },
+            'customer_delivery_details': {
+                'delivery_name': u'Maija Mehiläinen',
+                'delivery_street_address': u'Pajukuja 2',
+                'delivery_city': u'Lappeenranta',
+                'delivery_post_number': u'53900',
+                'delivery_country': u'FI',
+            },
+            'customer_contact_details': {
+                'contact_person': u'Matti Meikäläinen',
+                'contact_person_email': u'matti.meikalainen@firma.fi',
+                'contact_person_phone': u'040 987 254',
+            },
+            'customer_additional_information': {
+                'comment': u'Kommentti',
+                'customer_reference_number': u'1070',
+                'invoicing_language': u'FI',
+            }
+        }
+        assert netvisor.customers.update(id=8, data=data) is None
+        request = responses.calls[0].request
+        assert request.body == get_request_content('Customer.xml')

@@ -9,7 +9,8 @@
 from ..responses.customers import (
     CreateCustomerResponse,
     CustomerListResponse,
-    GetCustomerResponse
+    GetCustomerResponse,
+    UpdateCustomerResponse
 )
 from ..schemas import CreateCustomerSchema
 from .base import Request
@@ -31,5 +32,13 @@ class CreateCustomerRequest(Request):
     method = 'POST'
     uri = 'Customer.nv'
     response_cls = CreateCustomerResponse
+    schema_cls = CreateCustomerSchema
+    tag_name = 'customer'
+
+
+class UpdateCustomerRequest(Request):
+    method = 'POST'
+    uri = 'Customer.nv'
+    response_cls = UpdateCustomerResponse
     schema_cls = CreateCustomerSchema
     tag_name = 'customer'

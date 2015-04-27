@@ -30,9 +30,12 @@ class Response(object):
         return inflection.underscore(key), data
 
     def deserialize(self):
-        schema = self.schema_cls(strict=True)
-        result = schema.load(self.raw_data['root'][self.tag_name])
-        self.data = result.data
+        if self.schema_cls is not None:
+            schema = self.schema_cls(strict=True)
+            result = schema.load(self.raw_data['root'][self.tag_name])
+            self.data = result.data
+        else:
+            self.data = None
 
     def raise_for_failure(self):
         if not self.is_ok:

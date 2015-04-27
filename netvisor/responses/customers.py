@@ -23,3 +23,8 @@ class GetCustomerResponse(Response):
 class CreateCustomerResponse(Response):
     schema_cls = RepliesSchema
     tag_name = 'replies'
+
+
+class UpdateCustomerResponse(Response):
+    schema_cls = None
+    tag_name = None

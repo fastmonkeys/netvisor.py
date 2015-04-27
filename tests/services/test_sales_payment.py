@@ -17,29 +17,27 @@ class TestSalesPaymentService(object):
         sales_payments = netvisor.sales_payments.list()
         assert sales_payments == [
             {
-                'id': 165,
+                'netvisor_key': 165,
                 'name': u'Matti Mallikas',
                 'date': date(2014, 2, 7),
-                'amount': decimal.Decimal('249.90'),
-                'foreign_currency_amount': None,
+                'sum': decimal.Decimal('249.90'),
                 'reference_number': u'1094',
+                'foreign_currency_amount': None,
                 'invoice_number': 1,
-                'bank_status': {
-                    'is_ok': False,
-                    'error_code': u'ERROR_IN_DUE_DATE',
-                    'error_description': u'Eräpäivä virheellinen'
+                'bank_status': 'FAILED',
+                'bank_status_error_description': {
+                    'code': u'ERROR_IN_DUE_DATE',
+                    'description': u'Eräpäivä virheellinen'
                 }
             },
             {
-                'id': 166,
+                'netvisor_key': 166,
                 'name': u'Assi Asiakas',
                 'date': date(2014, 3, 10),
-                'amount': decimal.Decimal('200'),
-                'foreign_currency_amount': None,
+                'sum': decimal.Decimal('200'),
                 'reference_number': u'1106',
+                'foreign_currency_amount': None,
                 'invoice_number': 2,
-                'bank_status': {
-                    'is_ok': True,
-                }
+                'bank_status': 'OK'
             }
         ]

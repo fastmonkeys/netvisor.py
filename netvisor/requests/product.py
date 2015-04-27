@@ -15,7 +15,6 @@ class GetProductRequest(Request):
     method = 'GET'
     uri = 'GetProduct.nv'
     response_cls = GetProductResponse
-    resource_key = 'product'
 
     def parse_response(self, response):
         data = super(GetProductRequest, self).parse_response(response)
@@ -36,4 +35,3 @@ class ProductListRequest(Request):
     method = 'GET'
     uri = 'ProductList.nv'
     response_cls = ProductListResponse
-    resource_key = 'product_list'

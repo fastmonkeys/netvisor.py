@@ -6,8 +6,6 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-import xmltodict
-
 from ..requests.customer import CustomerListRequest, GetCustomerRequest
 from .base import Service
 

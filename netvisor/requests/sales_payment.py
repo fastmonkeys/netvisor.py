@@ -14,4 +14,3 @@ class SalesPaymentListRequest(Request):
     method = 'GET'
     uri = 'SalesPaymentList.nv'
     response_cls = SalesPaymentListResponse
-    resource_key = 'sales_payment_list'

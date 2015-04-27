@@ -37,6 +37,7 @@ setup(
     platforms='any',
     install_requires=[
         'inflection',
+        'marshmallow>=2.0.0b1',
         'requests',
         'xmltodict',
     ],

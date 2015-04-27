@@ -18,7 +18,6 @@ class GetSalesInvoiceRequest(Request):
     method = 'GET'
     uri = 'GetSalesInvoice.nv'
     response_cls = GetSalesInvoiceResponse
-    resource_key = 'sales_invoice'
 
     def parse_response(self, response):
         data = super(GetSalesInvoiceRequest, self).parse_response(response)
@@ -39,4 +38,3 @@ class SalesInvoiceListRequest(Request):
     method = 'GET'
     uri = 'SalesInvoiceList.nv'
     response_cls = SalesInvoiceListResponse
-    resource_key = 'sales_invoice_list'

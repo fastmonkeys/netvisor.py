@@ -23,5 +23,4 @@ class Request(object):
 
     def parse_response(self, response):
         response = self.response_cls(response)
-        response.raise_for_failure()
-        return response.data['root'][self.resource_key]
+        return response.data

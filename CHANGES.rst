@@ -3,6 +3,12 @@ Changelog
 
 Here you can see the full list of changes between each Unistorage release.
 
+
+0.3.1 (April 29th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed `netvisor.schemas` package missing from the source distribution.
+
 0.3.0 (April 29th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 

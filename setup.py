@@ -1,7 +1,7 @@
 import os
 import re
 
-from setuptools import setup
+from setuptools import find_packages, setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -24,12 +24,7 @@ setup(
     author='Janne Vanhala',
     author_email='janne@fastmonkeys.com',
     url='http://github.com/fastmonkeys/netvisor.py',
-    packages=[
-        'netvisor',
-        'netvisor.requests',
-        'netvisor.responses',
-        'netvisor.services',
-    ],
+    packages=find_packages(),
     package_data={
         '': ['LICENSE']
     },

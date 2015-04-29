@@ -8,9 +8,12 @@
 """
 from ..exc import InvalidData
 from ..responses.sales_invoices import (
+    CreateSalesInvoiceResponse,
     GetSalesInvoiceResponse,
-    SalesInvoiceListResponse
+    SalesInvoiceListResponse,
+    UpdateSalesInvoiceResponse
 )
+from ..schemas import CreateSalesInvoiceSchema
 from .base import Request
 
 
@@ -38,3 +41,19 @@ class SalesInvoiceListRequest(Request):
     method = 'GET'
     uri = 'SalesInvoiceList.nv'
     response_cls = SalesInvoiceListResponse
+
+
+class CreateSalesInvoiceRequest(Request):
+    method = 'POST'
+    uri = 'salesinvoice.nv'
+    response_cls = CreateSalesInvoiceResponse
+    schema_cls = CreateSalesInvoiceSchema
+    tag_name = 'sales_invoice'
+
+
+class UpdateSalesInvoiceRequest(Request):
+    method = 'POST'
+    uri = 'salesinvoice.nv'
+    response_cls = UpdateSalesInvoiceResponse
+    schema_cls = CreateSalesInvoiceSchema
+    tag_name = 'sales_invoice'

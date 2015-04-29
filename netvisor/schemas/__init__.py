@@ -7,6 +7,7 @@ from .customers import (  # noqa
 from .products import GetProductSchema, ProductListSchema  # noqa
 from .replies import RepliesSchema  # noqa
 from .sales_invoices import (  # noqa
+    CreateSalesInvoiceSchema,
     GetSalesInvoiceSchema,
     SalesInvoiceListSchema
 )

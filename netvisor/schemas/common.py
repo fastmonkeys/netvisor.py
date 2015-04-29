@@ -14,8 +14,12 @@ from .fields import Decimal
 class RejectUnknownFieldsSchema(Schema):
     @pre_dump
     def check_unknown_fields(self, data):
+        field_names = set()
+        for field_name, field in self.fields.items():
+            attribute = getattr(field, 'attribute', None)
+            field_names.add(field_name if attribute is None else attribute)
         for k in data:
-            if k not in self.fields:
+            if k not in field_names:
                 raise ValidationError("Unknown field name: '{}'".format(k))
 
 

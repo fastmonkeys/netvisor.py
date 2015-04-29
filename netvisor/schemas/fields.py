@@ -8,7 +8,7 @@
 """
 from datetime import datetime
 
-from marshmallow import ValidationError, fields
+from marshmallow import ValidationError, fields, missing
 
 
 class Boolean(fields.Boolean):
@@ -27,6 +27,12 @@ class Boolean(fields.Boolean):
 class Decimal(fields.Decimal):
     def _deserialize(self, value):
         return super(Decimal, self)._deserialize(value.replace(',', '.'))
+
+    def serialize(self, attr, obj, accessor=None):
+        value = super(Decimal, self).serialize(attr, obj, accessor)
+        if value is missing:
+            return value
+        return str(value).replace('.', ',')
 
 
 class FinnishDate(fields.Field):

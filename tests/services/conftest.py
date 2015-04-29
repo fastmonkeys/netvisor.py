@@ -1,11 +1,10 @@
 import pytest
 from responses import RequestsMock
 
-from netvisor import Netvisor
-
 
 @pytest.fixture
 def netvisor():
+    from netvisor import Netvisor
     kwargs = dict(
         sender='Test client',
         partner_id='xxx_yyy',

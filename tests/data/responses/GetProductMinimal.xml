@@ -7,18 +7,18 @@
   <Product>
     <ProductBaseInformation>
       <NetvisorKey>165</NetvisorKey>
-      <ProductCode>CC</ProductCode>
-      <ProductGroup>Kirjat</ProductGroup>
+      <ProductCode></ProductCode>
+      <ProductGroup></ProductGroup>
       <Name>Code Complete</Name>
       <Description></Description>
       <UnitPrice Type="brutto">0,0000</UnitPrice>
       <Unit></Unit>
       <UnitWeight></UnitWeight>
-      <PurchasePrice>0,0000</PurchasePrice>
+      <PurchasePrice></PurchasePrice>
       <TariffHeading></TariffHeading>
-      <ComissionPercentage>0</ComissionPercentage>
+      <ComissionPercentage></ComissionPercentage>
       <IsActive>0</IsActive>
-      <IsSalesProduct>1</IsSalesProduct>
+      <IsSalesProduct></IsSalesProduct>
     </ProductBaseInformation>
     <ProductBookKeepingDetails>
       <DefaultVatPercent>0</DefaultVatPercent>

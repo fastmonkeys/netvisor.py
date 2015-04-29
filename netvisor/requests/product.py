@@ -3,19 +3,18 @@
     netvisor.requests.product
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..exc import InvalidData
 from ..responses.products import GetProductResponse, ProductListResponse
+from .base import Request
 
 
 class GetProductRequest(Request):
     method = 'GET'
     uri = 'GetProduct.nv'
     response_cls = GetProductResponse
-    resource_key = 'product'
 
     def parse_response(self, response):
         data = super(GetProductRequest, self).parse_response(response)
@@ -36,4 +35,3 @@ class ProductListRequest(Request):
     method = 'GET'
     uri = 'ProductList.nv'
     response_cls = ProductListResponse
-    resource_key = 'product_list'

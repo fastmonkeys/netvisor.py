@@ -2,7 +2,7 @@
     netvisor.client
     ~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
 from __future__ import absolute_import

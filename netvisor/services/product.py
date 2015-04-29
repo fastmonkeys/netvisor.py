@@ -3,16 +3,16 @@
     netvisor.services.product
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Service
 from ..requests.product import GetProductRequest, ProductListRequest
+from .base import Service
 
 
 class ProductService(Service):
     def get(self, id):
-        request = GetProductRequest(self.client, id=id)
+        request = GetProductRequest(self.client, params={'id': id})
         return request.make_request()
 
     def list(self):

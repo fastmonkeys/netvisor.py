@@ -3,10 +3,10 @@
     netvisor
     ~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 
 from .core import Netvisor  # flake8: noqa

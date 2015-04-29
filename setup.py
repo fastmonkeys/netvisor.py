@@ -1,7 +1,7 @@
-from setuptools import setup
 import os
 import re
 
+from setuptools import setup
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,6 +37,7 @@ setup(
     platforms='any',
     install_requires=[
         'inflection',
+        'marshmallow>=2.0.0b1',
         'requests',
         'xmltodict',
     ],
@@ -50,6 +51,7 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ]
 )

@@ -3,22 +3,42 @@
     netvisor.requests.customer
     ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
+from ..responses.customers import (
+    CreateCustomerResponse,
+    CustomerListResponse,
+    GetCustomerResponse,
+    UpdateCustomerResponse
+)
+from ..schemas import CreateCustomerSchema
 from .base import Request
-from ..responses.customers import CustomerListResponse, GetCustomerResponse
 
 
 class GetCustomerRequest(Request):
     method = 'GET'
     uri = 'GetCustomer.nv'
     response_cls = GetCustomerResponse
-    resource_key = 'customer'
 
 
 class CustomerListRequest(Request):
     method = 'GET'
     uri = 'CustomerList.nv'
     response_cls = CustomerListResponse
-    resource_key = 'customer_list'
+
+
+class CreateCustomerRequest(Request):
+    method = 'POST'
+    uri = 'Customer.nv'
+    response_cls = CreateCustomerResponse
+    schema_cls = CreateCustomerSchema
+    tag_name = 'customer'
+
+
+class UpdateCustomerRequest(Request):
+    method = 'POST'
+    uri = 'Customer.nv'
+    response_cls = UpdateCustomerResponse
+    schema_cls = CreateCustomerSchema
+    tag_name = 'customer'

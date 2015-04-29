@@ -3,28 +3,39 @@
     netvisor.responses.base
     ~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
+import inflection
 import xmltodict
 
 from ..exc import NetvisorError
 
 
 class Response(object):
-    postprocessor = None
-
     def __init__(self, response):
         self.response = response
-        self.data = self.parse()
+        self.parse()
+        self.raise_for_failure()
+        self.deserialize()
 
     def parse(self):
-        return xmltodict.parse(
+        self.raw_data = xmltodict.parse(
             self.response.text,
-            postprocessor=self.postprocessor,
-            xml_attribs=False,
+            postprocessor=self.postprocess,
             dict_constructor=dict
         )
+
+    def postprocess(self, path, key, data):
+        return inflection.underscore(key), data
+
+    def deserialize(self):
+        if self.schema_cls is not None:
+            schema = self.schema_cls(strict=True)
+            result = schema.load(self.raw_data['root'][self.tag_name])
+            self.data = result.data
+        else:
+            self.data = None
 
     def raise_for_failure(self):
         if not self.is_ok:
@@ -32,7 +43,7 @@ class Response(object):
 
     @property
     def statuses(self):
-        return self.data['root']['response_status']['status']
+        return self.raw_data['root']['response_status']['status']
 
     @property
     def is_ok(self):

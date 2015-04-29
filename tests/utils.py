@@ -10,10 +10,23 @@ def get_responses_dir():
     return os.path.join(get_data_dir(), 'responses')
 
 
+def get_requests_dir():
+    return os.path.join(get_data_dir(), 'requests')
+
+
+def read_file(filename):
+    with io.open(filename, 'r', encoding='utf-8') as f:
+        return f.read()
+
+
 def get_response_content(filename):
     filename = os.path.join(get_responses_dir(), filename)
-    with io.open(filename, 'rb') as f:
-        return f.read()
+    return read_file(filename)
+
+
+def get_request_content(filename):
+    filename = os.path.join(get_requests_dir(), filename)
+    return read_file(filename)
 
 
 def get_response_text(filename):

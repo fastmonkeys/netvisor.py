@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from datetime import date
 import decimal
+from datetime import date
 
 import pytest
+from marshmallow import ValidationError
 
 from netvisor.exc import InvalidData
-from ..utils import get_response_content
+
+from ..utils import get_request_content, get_response_content
 
 
 class TestSalesInvoiceService(object):
@@ -25,63 +27,59 @@ class TestSalesInvoiceService(object):
             'due_date': date(2012, 2, 11),
             'reference_number': u'1070',
             'amount': decimal.Decimal(244.00),
-            'seller': u'Jarmo',
-            'status': u'Unsent',
+            'seller_identifier': u'Jarmo',
+            'invoice_status': u'Unsent',
             'free_text_before_lines': None,
             'free_text_after_lines': None,
             'our_reference': None,
             'your_reference': None,
             'private_comment': None,
-            'billing_address': {
-                'name': u'Matti Mallikas',
-                'street': u'Pajukuja 1',
-                'postal_code': u'53100',
-                'post_office': u'Lappeenranta',
-                'country': u'FINLAND',
-            },
+            'invoicing_customer_name': u'Matti Mallikas',
+            'invoicing_customer_address_line': u'Pajukuja 1',
+            'invoicing_customer_post_number': u'53100',
+            'invoicing_customer_town': u'Lappeenranta',
+            'invoicing_customer_country_code': u'FINLAND',
             'match_partial_payments_by_default': False,
-            'delivery_address': {
-                'name': u'Netvisor Oy',
-                'street': u'Snelmanninkatu 12',
-                'postal_code': u'53100',
-                'post_office': u'LPR',
-                'country': u'FINLAND',
-            },
+            'delivery_address_name': u'Netvisor Oy',
+            'delivery_address_line': u'Snelmanninkatu 12',
+            'delivery_address_post_number': u'53100',
+            'delivery_address_town': u'LPR',
+            'delivery_address_country_code': u'FINLAND',
             'delivery_method': None,
             'delivery_term': None,
             'payment_term_net_days': 14,
             'payment_term_cash_discount_days': 5,
             'payment_term_cash_discount': decimal.Decimal('9'),
-            'lines': [
+            'invoice_lines': [
                 {
-                    'product_code': u'OMENA',
+                    'identifier': u'OMENA',
                     'name': u'Omena',
-                    'free_text': None,
-                    'quantity': decimal.Decimal('2'),
                     'unit_price': decimal.Decimal('6.9000'),
-                    'discount_percentage': decimal.Decimal('0'),
-                    'vat': {
+                    'vat_percentage': {
                         'percentage': decimal.Decimal('22'),
                         'code': u'KOMY',
-                        'amount': decimal.Decimal('3.04'),
                     },
-                    'amount': decimal.Decimal('16.84'),
-                    'accounting_suggestion': u'551',
+                    'quantity': decimal.Decimal('2'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'free_text': None,
+                    'vat_sum': decimal.Decimal('3.04'),
+                    'sum': decimal.Decimal('16.84'),
+                    'accounting_account_suggestion': u'551',
                 },
                 {
-                    'product_code': u'BANAANI',
+                    'identifier': u'BANAANI',
                     'name': u'Banaani',
-                    'free_text': None,
-                    'quantity': decimal.Decimal('1'),
                     'unit_price': decimal.Decimal('2.4900'),
-                    'discount_percentage': decimal.Decimal('0'),
-                    'vat': {
+                    'vat_percentage': {
                         'percentage': decimal.Decimal('22'),
                         'code': u'KOMY',
-                        'amount': decimal.Decimal('0.5478'),
                     },
-                    'amount': decimal.Decimal('3.0378'),
-                    'accounting_suggestion': u'551'
+                    'quantity': decimal.Decimal('1'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'free_text': None,
+                    'vat_sum': decimal.Decimal('0.5478'),
+                    'sum': decimal.Decimal('3.0378'),
+                    'accounting_account_suggestion': u'551'
                 }
             ]
         }
@@ -118,18 +116,16 @@ class TestSalesInvoiceService(object):
         sales_invoices = netvisor.sales_invoices.list()
         assert sales_invoices == [
             {
-                'id': 165,
+                'netvisor_key': 165,
                 'number': 5,
                 'date': date(2013, 11, 9),
                 'status': u'open',
                 'substatus': u'overdue',
+                'customer_code': u'MM',
+                'customer_name': u'Matti Meikäläinen',
                 'reference_number': u'1070',
-                'amount': decimal.Decimal('123.45'),
-                'open_amount': decimal.Decimal('45.67'),
-                'customer': {
-                    'code': u'MM',
-                    'name': u'Matti Meikäläinen',
-                }
+                'sum': decimal.Decimal('123.45'),
+                'open_sum': decimal.Decimal('45.67'),
             }
         ]
 
@@ -171,3 +167,187 @@ class TestSalesInvoiceService(object):
         )
         sales_invoices = netvisor.sales_invoices.list(invoice_number=5)
         assert len(sales_invoices) == 1
+
+    def test_create(self, netvisor, responses):
+        responses.add(
+            method='POST',
+            url='http://koulutus.netvisor.fi/salesinvoice.nv?method=add',
+            body=get_response_content('SalesInvoiceCreate.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        netvisor_id = netvisor.sales_invoices.create({
+            'date': date(2008, 12, 12),
+            'delivery_date': date(2008, 7, 25),
+            'reference_number': '1070',
+            'amount': decimal.Decimal('244.00'),
+            'seller_identifier': 32,
+            'status': 'unsent',
+            'invoicing_customer_identifier': u'1',
+            'invoicing_customer_name': u'Matti Mallikas',
+            'invoicing_customer_name_extension': u'Masa',
+            'invoicing_customer_address_line': u'Pajukuja 1',
+            'invoicing_customer_additional_address_line': None,
+            'invoicing_customer_post_number': u'53100',
+            'invoicing_customer_town': u'Lappeenranta',
+            'invoicing_customer_country_code': u'FI',
+            'delivery_address_name': u'Netvisor Oy',
+            'delivery_address_name_extension':
+                u'Ohjelmistokehitys ja tuotanto',
+            'delivery_address_line': u'Snelmanninkatu 12',
+            'delivery_address_post_number': u'53100',
+            'delivery_address_town': u'LPR',
+            'delivery_address_country_code': u'FI',
+            'payment_term_net_days': 14,
+            'payment_term_cash_discount_days': 5,
+            'payment_term_cash_discount': decimal.Decimal('9'),
+            'invoice_lines': [
+                {
+                    'identifier': '1697',
+                    'name': 'Omena',
+                    'unit_price': {
+                        'amount': decimal.Decimal('6.90'),
+                        'type': 'net'
+                    },
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': 'KOMY',
+                    },
+                    'quantity': decimal.Decimal('2'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'accounting_account_suggestion': '3000'
+                },
+                {
+                    'identifier': '1697',
+                    'name': 'Banaani',
+                    'unit_price': {
+                        'amount': decimal.Decimal('100.00'),
+                        'type': 'net'
+                    },
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': 'KOMY',
+                    },
+                    'quantity': decimal.Decimal('1'),
+                    'accounting_account_suggestion': '3200'
+                }
+            ]
+        })
+        request = responses.calls[0].request
+        assert netvisor_id == 8
+        assert request.body == get_request_content('SalesInvoice.xml')
+
+    def test_create_minimal(self, netvisor, responses):
+        responses.add(
+            method='POST',
+            url='http://koulutus.netvisor.fi/salesinvoice.nv?method=add',
+            body=get_response_content('SalesInvoiceCreate.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        netvisor_id = netvisor.sales_invoices.create({
+            'date': date(2008, 12, 12),
+            'amount': decimal.Decimal('244.00'),
+            'status': 'unsent',
+            'invoicing_customer_identifier': u'1',
+            'payment_term_net_days': 14,
+            'payment_term_cash_discount_days': 5,
+            'payment_term_cash_discount': decimal.Decimal('9'),
+            'invoice_lines': [
+                {
+                    'identifier': '1697',
+                    'name': 'Omena',
+                    'unit_price': {
+                        'amount': decimal.Decimal('6.90'),
+                        'type': 'net'
+                    },
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': 'KOMY',
+                    },
+                    'quantity': decimal.Decimal('2'),
+                }
+            ]
+        })
+        request = responses.calls[0].request
+        assert netvisor_id == 8
+        assert request.body == get_request_content('SalesInvoiceMinimal.xml')
+
+    @pytest.mark.parametrize('data', [
+        {'foo': 'bar'},
+        {'invoice_lines': {'foo': 'bar'}},
+        {'invoice_lines': [{'foo': 'bar'}]},
+    ])
+    def test_create_with_unknown_fields(self, netvisor, responses, data):
+        with pytest.raises(ValidationError):
+            netvisor.customers.create(data)
+
+    def test_update(self, netvisor, responses):
+        responses.add(
+            method='POST',
+            url='http://koulutus.netvisor.fi/salesinvoice.nv?method=edit&id=8',
+            body=get_response_content('SalesInvoiceEdit.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        data = {
+            'date': date(2008, 12, 12),
+            'delivery_date': date(2008, 7, 25),
+            'reference_number': '1070',
+            'amount': decimal.Decimal('244.00'),
+            'seller_identifier': 32,
+            'status': 'unsent',
+            'invoicing_customer_identifier': u'1',
+            'invoicing_customer_name': u'Matti Mallikas',
+            'invoicing_customer_name_extension': u'Masa',
+            'invoicing_customer_address_line': u'Pajukuja 1',
+            'invoicing_customer_additional_address_line': None,
+            'invoicing_customer_post_number': u'53100',
+            'invoicing_customer_town': u'Lappeenranta',
+            'invoicing_customer_country_code': u'FI',
+            'delivery_address_name': u'Netvisor Oy',
+            'delivery_address_name_extension':
+                u'Ohjelmistokehitys ja tuotanto',
+            'delivery_address_line': u'Snelmanninkatu 12',
+            'delivery_address_post_number': u'53100',
+            'delivery_address_town': u'LPR',
+            'delivery_address_country_code': u'FI',
+            'payment_term_net_days': 14,
+            'payment_term_cash_discount_days': 5,
+            'payment_term_cash_discount': decimal.Decimal('9'),
+            'invoice_lines': [
+                {
+                    'identifier': '1697',
+                    'name': 'Omena',
+                    'unit_price': {
+                        'amount': decimal.Decimal('6.90'),
+                        'type': 'net'
+                    },
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': 'KOMY',
+                    },
+                    'quantity': decimal.Decimal('2'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'accounting_account_suggestion': '3000'
+                },
+                {
+                    'identifier': '1697',
+                    'name': 'Banaani',
+                    'unit_price': {
+                        'amount': decimal.Decimal('100.00'),
+                        'type': 'net'
+                    },
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': 'KOMY',
+                    },
+                    'quantity': decimal.Decimal('1'),
+                    'accounting_account_suggestion': '3200'
+                }
+            ]
+        }
+        assert netvisor.sales_invoices.update(id=8, data=data) is None
+
+        request = responses.calls[0].request
+        assert request.body == get_request_content('SalesInvoice.xml')

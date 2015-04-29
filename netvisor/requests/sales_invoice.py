@@ -3,22 +3,24 @@
     netvisor.requests.sales_invoice
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2014 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from .base import Request
 from ..exc import InvalidData
 from ..responses.sales_invoices import (
+    CreateSalesInvoiceResponse,
     GetSalesInvoiceResponse,
     SalesInvoiceListResponse,
+    UpdateSalesInvoiceResponse
 )
+from ..schemas import CreateSalesInvoiceSchema
+from .base import Request
 
 
 class GetSalesInvoiceRequest(Request):
     method = 'GET'
     uri = 'GetSalesInvoice.nv'
     response_cls = GetSalesInvoiceResponse
-    resource_key = 'sales_invoice'
 
     def parse_response(self, response):
         data = super(GetSalesInvoiceRequest, self).parse_response(response)
@@ -39,4 +41,19 @@ class SalesInvoiceListRequest(Request):
     method = 'GET'
     uri = 'SalesInvoiceList.nv'
     response_cls = SalesInvoiceListResponse
-    resource_key = 'sales_invoice_list'
+
+
+class CreateSalesInvoiceRequest(Request):
+    method = 'POST'
+    uri = 'salesinvoice.nv'
+    response_cls = CreateSalesInvoiceResponse
+    schema_cls = CreateSalesInvoiceSchema
+    tag_name = 'sales_invoice'
+
+
+class UpdateSalesInvoiceRequest(Request):
+    method = 'POST'
+    uri = 'salesinvoice.nv'
+    response_cls = UpdateSalesInvoiceResponse
+    schema_cls = CreateSalesInvoiceSchema
+    tag_name = 'sales_invoice'

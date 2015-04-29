@@ -1,8 +1,8 @@
 import uuid
 
+import pytest
 from flexmock import flexmock
 from freezegun import freeze_time
-import pytest
 
 
 def make_auth(

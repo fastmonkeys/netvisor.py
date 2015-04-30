@@ -6,15 +6,26 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, pre_load
 
+from ..._compat import string_types
 from ..common import DateSchema
 from ..fields import Decimal
 
 
 class StatusSchema(Schema):
     status = fields.String(load_from='#text')
-    substatus = fields.String(load_from='@substatus')
+    substatus = fields.String(allow_none=True, load_from='@substatus')
+
+    @pre_load
+    def pre_load(self, data):
+        if isinstance(data, string_types):
+            return {
+                '#text': data,
+                '@substatus': None
+            }
+        else:
+            return data
 
 
 class SalesInvoiceSchema(Schema):
@@ -22,7 +33,7 @@ class SalesInvoiceSchema(Schema):
     number = fields.Integer(load_from='invoice_number')
     date = fields.Nested(DateSchema, load_from='invoicedate')
     status = fields.Nested(StatusSchema, load_from='invoice_status')
-    customer_code = fields.String()
+    customer_code = fields.String(allow_none=True)
     customer_name = fields.String()
     reference_number = fields.String()
     sum = Decimal(load_from='invoice_sum')
@@ -31,8 +42,7 @@ class SalesInvoiceSchema(Schema):
 
 @SalesInvoiceSchema.preprocessor
 def preprocess_sales_invoice(schema, input_data):
-    input_data['substatus'] = input_data['status']['substatus']
-    input_data['status'] = input_data['status']['status']
+    input_data.update(input_data['status'])
     return input_data
 
 

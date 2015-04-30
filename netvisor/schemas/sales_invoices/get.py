@@ -32,7 +32,7 @@ class SalesInvoiceProductLineSchema(Schema):
         allow_none=True,
         load_from='sales_invoice_product_line_free_text'
     )
-    accounting_account_suggestion = fields.String()
+    accounting_account_suggestion = fields.String(allow_none=True)
     sum = Decimal(load_from='sales_invoice_product_line_sum')
     vat_percentage = fields.Nested(
         VatPercentageSchema,
@@ -88,7 +88,11 @@ class GetSalesInvoiceSchema(Schema):
         required=True,
         load_from='sales_invoice_referencenumber'
     )
-    amount = Decimal(required=True, load_from='sales_invoice_amount')
+    amount = fields.Nested(
+        DecimalSchema(),
+        required=True,
+        load_from='sales_invoice_amount'
+    )
     delivery_method = fields.String(
         required=True,
         allow_none=True
@@ -112,23 +116,29 @@ class GetSalesInvoiceSchema(Schema):
     payment_term_net_days = fields.Integer(required=True)
     invoicing_customer_name = fields.String(required=True)
     invoicing_customer_address_line = fields.String(
+        allow_none=True,
         required=True,
         load_from='invoicing_customer_addressline'
     )
     invoicing_customer_post_number = fields.String(
+        allow_none=True,
         required=True,
         load_from='invoicing_customer_postnumber'
     )
-    invoicing_customer_town = fields.String(required=True)
+    invoicing_customer_town = fields.String(allow_none=True, required=True)
     invoicing_customer_country_code = fields.String(required=True)
-    delivery_address_name = fields.String(required=True)
-    delivery_address_line = fields.String(required=True)
+    delivery_address_name = fields.String(allow_none=True, required=True)
+    delivery_address_line = fields.String(allow_none=True, required=True)
     delivery_address_post_number = fields.String(
+        allow_none=True,
         required=True,
         load_from='delivery_address_postnumber'
     )
-    delivery_address_town = fields.String(required=True)
-    delivery_address_country_code = fields.String(required=True)
+    delivery_address_town = fields.String(allow_none=True, required=True)
+    delivery_address_country_code = fields.String(
+        allow_none=True,
+        required=True
+    )
     our_reference = fields.String(
         allow_none=True,
         load_from='sales_invoice_our_reference'

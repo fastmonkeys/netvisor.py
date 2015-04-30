@@ -84,6 +84,64 @@ class TestSalesInvoiceService(object):
             ]
         }
 
+    def test_get_minimal(self, netvisor, responses):
+        responses.add(
+            method='GET',
+            url='http://koulutus.netvisor.fi/GetSalesInvoice.nv?NetvisorKey=5',
+            body=get_response_content('GetSalesInvoiceMinimal.xml'),
+            content_type='text/html; charset=utf-8',
+            match_querystring=True
+        )
+        sales_invoice = netvisor.sales_invoices.get(5)
+        assert sales_invoice == {
+            'number': 3,
+            'date': date(2012, 1, 27),
+            'delivery_date': date(2012, 1, 27),
+            'due_date': date(2012, 2, 11),
+            'reference_number': u'1070',
+            'amount': decimal.Decimal(244.00),
+            'seller_identifier': None,
+            'invoice_status': u'Unsent',
+            'free_text_before_lines': None,
+            'free_text_after_lines': None,
+            'our_reference': None,
+            'your_reference': None,
+            'private_comment': None,
+            'invoicing_customer_name': u'Matti Mallikas',
+            'invoicing_customer_address_line': None,
+            'invoicing_customer_post_number': None,
+            'invoicing_customer_town': None,
+            'invoicing_customer_country_code': u'FINLAND',
+            'match_partial_payments_by_default': False,
+            'delivery_address_name': None,
+            'delivery_address_line': None,
+            'delivery_address_post_number': None,
+            'delivery_address_town': None,
+            'delivery_address_country_code': None,
+            'delivery_method': None,
+            'delivery_term': None,
+            'payment_term_net_days': 14,
+            'payment_term_cash_discount_days': 5,
+            'payment_term_cash_discount': decimal.Decimal('9'),
+            'invoice_lines': [
+                {
+                    'identifier': u'OMENA',
+                    'name': u'Omena',
+                    'unit_price': decimal.Decimal('6.9000'),
+                    'vat_percentage': {
+                        'percentage': decimal.Decimal('22'),
+                        'code': u'KOMY',
+                    },
+                    'quantity': decimal.Decimal('2'),
+                    'discount_percentage': decimal.Decimal('0'),
+                    'free_text': None,
+                    'vat_sum': decimal.Decimal('3.04'),
+                    'sum': decimal.Decimal('16.84'),
+                    'accounting_account_suggestion': None,
+                }
+            ]
+        }
+
     def test_get_raises_error_if_sales_invoice_not_found(
         self, netvisor, responses
     ):
@@ -122,6 +180,18 @@ class TestSalesInvoiceService(object):
                 'status': u'open',
                 'substatus': u'overdue',
                 'customer_code': u'MM',
+                'customer_name': u'Matti Meikäläinen',
+                'reference_number': u'1070',
+                'sum': decimal.Decimal('123.45'),
+                'open_sum': decimal.Decimal('45.67'),
+            },
+            {
+                'netvisor_key': 166,
+                'number': 6,
+                'date': date(2015, 4, 29),
+                'status': u'unsent',
+                'substatus': None,
+                'customer_code': None,
                 'customer_name': u'Matti Meikäläinen',
                 'reference_number': u'1070',
                 'sum': decimal.Decimal('123.45'),
@@ -165,8 +235,7 @@ class TestSalesInvoiceService(object):
             content_type='text/html; charset=utf-8',
             match_querystring=True
         )
-        sales_invoices = netvisor.sales_invoices.list(invoice_number=5)
-        assert len(sales_invoices) == 1
+        netvisor.sales_invoices.list(invoice_number=5)
 
     def test_create(self, netvisor, responses):
         responses.add(

@@ -4,6 +4,28 @@ Changelog
 Here you can see the full list of changes between each Unistorage release.
 
 
+0.3.2 (April 30th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed `netvisor.sales_invoices.get()` crashing when the
+  `<SalesInvoiceAmount>` element had attributes in the XML response.
+- Fixed `netvisor.sales_invoices.get()` crashing when any of the following
+  elements were empty in the XML response:
+    - seller identifier
+    - invoicing customer address line
+    - invoicing customer post number
+    - invoicing customer town
+    - delivery address name
+    - delivery address line
+    - delivery address post number
+    - delivery address town
+    - delivery address country code
+    - accounting account suggestion
+- Fixed `netvisor.sales_invoices.list()` crashing when customer code was empty
+  in the XML response.
+- Fixed `netvisor.sales_invoices.list()` crashing when invoice status had no
+  substatus in the XML response.
+
 0.3.1 (April 29th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 

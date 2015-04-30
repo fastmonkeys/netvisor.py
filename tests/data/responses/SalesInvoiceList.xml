@@ -17,5 +17,17 @@
       <OpenSum>45,67</OpenSum>
       <Uri>http://koulutus.netvisor.fi/getsalesinvoice.nv?netvisorkey=165</Uri>
     </SalesInvoice>
+    <SalesInvoice>
+      <NetvisorKey>166</NetvisorKey>
+      <InvoiceNumber>6</InvoiceNumber>
+      <Invoicedate format="ansi">2015-04-29</Invoicedate>
+      <InvoiceStatus>unsent</InvoiceStatus>
+      <CustomerCode />
+      <CustomerName>Matti Meikäläinen</CustomerName>
+      <ReferenceNumber>1070</ReferenceNumber>
+      <InvoiceSum>123,45</InvoiceSum>
+      <OpenSum>45,67</OpenSum>
+      <Uri>http://koulutus.netvisor.fi/getsalesinvoice.nv?netvisorkey=166</Uri>
+    </SalesInvoice>
   </SalesInvoiceList>
 </Root>

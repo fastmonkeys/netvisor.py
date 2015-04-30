@@ -6,8 +6,16 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, ValidationError, fields, pre_dump
+from marshmallow import (
+    MarshalResult,
+    Schema,
+    ValidationError,
+    fields,
+    pre_dump,
+    pre_load
+)
 
+from .._compat import string_types
 from .fields import Decimal
 
 
@@ -23,20 +31,25 @@ class RejectUnknownFieldsSchema(Schema):
                 raise ValidationError("Unknown field name: '{}'".format(k))
 
 
-class DateSchema(Schema):
+class FlattenElementSchema(Schema):
+    @pre_load
+    def pre_load(self, data):
+        if isinstance(data, string_types):
+            return {'#text': data}
+        return data
+
+    def load(self, *args, **kwargs):
+        result = super(FlattenElementSchema, self).load(*args, **kwargs)
+        return MarshalResult(result.data.get('text'), result.errors)
+
+
+class DateSchema(FlattenElementSchema):
     text = fields.Date(load_from='#text')
 
 
-class StringSchema(Schema):
-    text = fields.String(required=True, load_from='#text')
+class StringSchema(FlattenElementSchema):
+    text = fields.String(load_from='#text')
 
 
-class DecimalSchema(Schema):
+class DecimalSchema(FlattenElementSchema):
     text = Decimal(required=True, load_from='#text')
-
-
-@DateSchema.preprocessor
-@DecimalSchema.preprocessor
-@StringSchema.preprocessor
-def flatten_element(schema, input_data):
-    return input_data['text']

@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Unistorage release.
 
 
+0.3.3 (May 29th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed too strict validation for payment term fields returned by Netvisor API
+  in `netvisor.sales_invoices.get()`.
+
 0.3.2 (April 30th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 

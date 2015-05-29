@@ -120,9 +120,9 @@ class TestSalesInvoiceService(object):
             'delivery_address_country_code': None,
             'delivery_method': None,
             'delivery_term': None,
-            'payment_term_net_days': 14,
-            'payment_term_cash_discount_days': 5,
-            'payment_term_cash_discount': decimal.Decimal('9'),
+            'payment_term_net_days': None,
+            'payment_term_cash_discount_days': None,
+            'payment_term_cash_discount': None,
             'invoice_lines': [
                 {
                     'identifier': u'OMENA',

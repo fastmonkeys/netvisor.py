@@ -52,4 +52,4 @@ class StringSchema(FlattenElementSchema):
 
 
 class DecimalSchema(FlattenElementSchema):
-    text = Decimal(required=True, load_from='#text')
+    text = Decimal(load_from='#text')

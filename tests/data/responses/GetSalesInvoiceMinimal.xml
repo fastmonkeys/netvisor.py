@@ -31,9 +31,9 @@
     <DeliveryAddressCountryCode />
     <DeliveryMethod />
     <DeliveryTerm />
-    <PaymentTermNetDays>14</PaymentTermNetDays>
-    <PaymentTermCashDiscountDays>5</PaymentTermCashDiscountDays>
-    <PaymentTermCashDiscount type="percentage">9</PaymentTermCashDiscount>
+    <PaymentTermNetDays />
+    <PaymentTermCashDiscountDays />
+    <PaymentTermCashDiscount type="percentage" />
     <InvoiceLines>
       <InvoiceLine>
         <SalesInvoiceProductLine>

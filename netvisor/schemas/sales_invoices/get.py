@@ -111,9 +111,9 @@ class GetSalesInvoiceSchema(Schema):
         allow_none=True,
         load_from='sales_invoice_free_text_before_lines'
     )
-    payment_term_cash_discount = fields.Nested(DecimalSchema, required=True)
-    payment_term_cash_discount_days = fields.Integer(required=True)
-    payment_term_net_days = fields.Integer(required=True)
+    payment_term_cash_discount = fields.Nested(DecimalSchema)
+    payment_term_cash_discount_days = fields.Integer(allow_none=True)
+    payment_term_net_days = fields.Integer(allow_none=True)
     invoicing_customer_name = fields.String(required=True)
     invoicing_customer_address_line = fields.String(
         allow_none=True,

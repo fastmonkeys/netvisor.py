@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Unistorage release.
 
 
+0.3.4 (September 10th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed UnicodeEncodeError when making a request containing non-ASCII
+  characters.
+
 0.3.3 (May 29th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^
 

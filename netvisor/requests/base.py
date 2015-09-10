@@ -22,6 +22,7 @@ class Request(object):
             method=self.method,
             path=self.uri,
             params=self.params,
+            headers={'content-type': 'text/xml; charset=utf-8'},
             data=self.unparse()
         )
         return self.parse_response(response)
@@ -47,7 +48,7 @@ class Request(object):
                 pretty=True,
                 indent='  '
             )
-            return self._remove_xml_declaration(xml)
+            return self._remove_xml_declaration(xml).encode('utf-8')
 
     def _remove_xml_declaration(self, xml):
         return xml.replace('<?xml version="1.0" encoding="utf-8"?>\n', '', 1)

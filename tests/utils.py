@@ -16,7 +16,7 @@ def get_requests_dir():
 
 def read_file(filename):
     with io.open(filename, 'r', encoding='utf-8') as f:
-        return f.read()
+        return f.read().encode('utf-8')
 
 
 def get_response_content(filename):

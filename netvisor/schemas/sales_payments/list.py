@@ -6,9 +6,9 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
-from ..fields import Decimal, FinnishDate
+from ..fields import Decimal, FinnishDate, List
 
 
 class BankStatusErrorDescriptionSchema(Schema):
@@ -31,12 +31,11 @@ class SalesPaymentSchema(Schema):
 
 
 class SalesPaymentListSchema(Schema):
-    sales_payments = fields.List(
+    sales_payments = List(
         fields.Nested(SalesPaymentSchema),
         load_from='sales_payment'
     )
 
-
-@SalesPaymentListSchema.preprocessor
-def preprocess_sales_payment_list(schema, input_data):
-    return input_data['sales_payments'] if input_data else []
+    @post_load
+    def preprocess_sales_payment_list(self, input_data):
+        return input_data['sales_payments'] if input_data else []

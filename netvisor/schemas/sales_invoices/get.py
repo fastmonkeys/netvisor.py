@@ -6,10 +6,10 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..common import DateSchema, DecimalSchema, StringSchema
-from ..fields import Boolean, Decimal
+from ..fields import Boolean, Decimal, List
 
 
 class VatPercentageSchema(Schema):
@@ -42,26 +42,24 @@ class SalesInvoiceProductLineSchema(Schema):
 
 
 class InvoiceLineSchema(Schema):
-    product_lines = fields.List(
+    product_lines = List(
         fields.Nested(SalesInvoiceProductLineSchema),
         load_from='sales_invoice_product_line'
     )
 
-
-@InvoiceLineSchema.preprocessor
-def preprocess_invoice_line(schema, input_data):
-    if input_data:
-        return input_data['product_lines']
+    @post_load
+    def preprocess_invoice_line(self, input_data):
+        if input_data:
+            return input_data['product_lines']
 
 
 class InvoiceLinesSchema(Schema):
     invoice_line = fields.Nested(InvoiceLineSchema)
 
-
-@InvoiceLinesSchema.preprocessor
-def preprocess_invoice_lines(schema, input_data):
-    if input_data:
-        return input_data['invoice_line']
+    @post_load
+    def preprocess_invoice_lines(self, input_data):
+        if input_data:
+            return input_data['invoice_line']
 
 
 class GetSalesInvoiceSchema(Schema):

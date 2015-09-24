@@ -32,7 +32,7 @@ setup(
     platforms='any',
     install_requires=[
         'inflection',
-        'marshmallow>=2.0.0b1',
+        'marshmallow>=2.0.0',
         'requests',
         'xmltodict',
     ],

@@ -9,7 +9,7 @@
 from marshmallow import fields, post_dump
 
 from ..common import RejectUnknownFieldsSchema
-from ..fields import Decimal
+from ..fields import Decimal, List
 
 
 class VatPercentageSchema(RejectUnknownFieldsSchema):
@@ -107,7 +107,7 @@ class CreateSalesInvoiceSchema(RejectUnknownFieldsSchema):
     payment_term_net_days = fields.Integer()
     payment_term_cash_discount_days = fields.Integer()
     payment_term_cash_discount = Decimal()
-    invoice_lines = fields.List(
+    invoice_lines = List(
         fields.Nested(SalesInvoiceProductLineSchema),
         default=list
     )

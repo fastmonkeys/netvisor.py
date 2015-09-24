@@ -9,6 +9,7 @@
 from datetime import datetime
 
 from marshmallow import ValidationError, fields, missing
+from marshmallow.utils import is_collection
 
 
 class Boolean(fields.Boolean):
@@ -25,8 +26,12 @@ class Boolean(fields.Boolean):
 
 
 class Decimal(fields.Decimal):
-    def _deserialize(self, value):
-        return super(Decimal, self)._deserialize(value.replace(',', '.'))
+    def _deserialize(self, value, attr, data):
+        return super(Decimal, self)._deserialize(
+            value.replace(',', '.'),
+            attr,
+            data
+        )
 
     def serialize(self, attr, obj, accessor=None):
         value = super(Decimal, self).serialize(attr, obj, accessor)
@@ -36,7 +41,7 @@ class Decimal(fields.Decimal):
 
 
 class FinnishDate(fields.Field):
-    def _deserialize(self, value):
+    def _deserialize(self, value, attr, data):
         msg = 'Could not deserialize {0!r} to a date object.'.format(value)
         err = ValidationError(getattr(self, 'error', None) or msg)
         if not value:  # falsy values are invalid
@@ -45,3 +50,10 @@ class FinnishDate(fields.Field):
             return datetime.strptime(value, '%d.%m.%Y').date()
         except (AttributeError, TypeError, ValueError):
             raise err
+
+
+class List(fields.List):
+    def _deserialize(self, value, attr, data):
+        if not is_collection(value) and value is not None:
+            value = [value]
+        return super(List, self)._deserialize(value, attr, data)

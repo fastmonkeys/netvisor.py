@@ -6,9 +6,9 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
-from ..fields import Decimal
+from ..fields import Decimal, List
 
 
 class ProductSchema(Schema):
@@ -19,9 +19,8 @@ class ProductSchema(Schema):
 
 
 class ProductListSchema(Schema):
-    products = fields.List(fields.Nested(ProductSchema), load_from='product')
+    products = List(fields.Nested(ProductSchema), load_from='product')
 
-
-@ProductListSchema.preprocessor
-def preprocess_product_list(schema, input_data):
-    return input_data['products'] if input_data else []
+    @post_load
+    def preprocess_product_list(self, input_data):
+        return input_data['products'] if input_data else []

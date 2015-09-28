@@ -6,11 +6,11 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields, pre_load
+from marshmallow import Schema, fields, post_load, pre_load
 
 from ..._compat import string_types
 from ..common import DateSchema
-from ..fields import Decimal
+from ..fields import Decimal, List
 
 
 class StatusSchema(Schema):
@@ -39,20 +39,18 @@ class SalesInvoiceSchema(Schema):
     sum = Decimal(load_from='invoice_sum')
     open_sum = Decimal(load_from='open_sum')
 
-
-@SalesInvoiceSchema.preprocessor
-def preprocess_sales_invoice(schema, input_data):
-    input_data.update(input_data['status'])
-    return input_data
+    @post_load
+    def preprocess_sales_invoice(self, input_data):
+        input_data.update(input_data['status'])
+        return input_data
 
 
 class SalesInvoiceListSchema(Schema):
-    sales_invoices = fields.List(
+    sales_invoices = List(
         fields.Nested(SalesInvoiceSchema),
         load_from='sales_invoice'
     )
 
-
-@SalesInvoiceListSchema.preprocessor
-def preprocess_sales_invoice_list(schema, input_data):
-    return input_data['sales_invoices'] if input_data else []
+    @post_load
+    def preprocess_sales_invoice_list(self, input_data):
+        return input_data['sales_invoices'] if input_data else []

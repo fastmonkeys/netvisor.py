@@ -6,7 +6,9 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
+
+from ..fields import List
 
 
 class CustomerSchema(Schema):
@@ -17,12 +19,11 @@ class CustomerSchema(Schema):
 
 
 class CustomerListSchema(Schema):
-    customers = fields.List(
+    customers = List(
         fields.Nested(CustomerSchema),
         load_from='customer'
     )
 
-
-@CustomerListSchema.preprocessor
-def preprocess_customer_list(schema, input_data):
-    return input_data['customers'] if input_data else []
+    @post_load
+    def preprocess_customer_list(self, input_data):
+        return input_data['customers'] if input_data else []

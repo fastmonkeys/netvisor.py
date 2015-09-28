@@ -6,9 +6,9 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
-from ..fields import Boolean
+from ..fields import Boolean, List
 
 
 class CompanySchema(Schema):
@@ -19,12 +19,11 @@ class CompanySchema(Schema):
 
 
 class CompanyListSchema(Schema):
-    companies = fields.List(
-        fields.Nested(CompanySchema),
+    companies = List(
+        fields.Nested(CompanySchema, allow_none=True),
         load_from='company'
     )
 
-
-@CompanyListSchema.preprocessor
-def preprocess_company_list(schema, input_data):
-    return input_data['companies'] if input_data else []
+    @post_load
+    def preprocess_company_list(self, input_data):
+        return input_data['companies'] if input_data else []

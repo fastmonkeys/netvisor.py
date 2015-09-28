@@ -6,9 +6,10 @@
     :copyright: (c) 2013-2015 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..common import DateSchema, StringSchema
+from ..fields import List
 
 
 class Address(Schema):
@@ -26,12 +27,11 @@ class RegisteredName(Schema):
 
 
 class RegisteredNames(Schema):
-    registered_name = fields.List(fields.Nested(RegisteredName))
+    registered_name = List(fields.Nested(RegisteredName))
 
-
-@RegisteredNames.preprocessor
-def preprocess_registered_names(schema, input_data):
-    return input_data['registered_name'] if input_data else []
+    @post_load
+    def preprocess_registered_names(self, input_data):
+        return input_data['registered_name'] if input_data else []
 
 
 class RegisteredPersonRole(Schema):
@@ -43,12 +43,11 @@ class RegisteredPersonRole(Schema):
 
 
 class RegisteredPersonRoles(Schema):
-    role = fields.List(fields.Nested(RegisteredPersonRole))
+    role = List(fields.Nested(RegisteredPersonRole))
 
-
-@RegisteredPersonRoles.preprocessor
-def preprocess_registered_person_roles(schema, input_data):
-    return input_data['role'] if input_data else []
+    @post_load
+    def preprocess_registered_person_roles(self, input_data):
+        return input_data['role'] if input_data else []
 
 
 class CompanySchema(Schema):
@@ -81,7 +80,6 @@ class CompanySchema(Schema):
 class GetCompanyInformationSchema(Schema):
     company = fields.Nested(CompanySchema)
 
-
-@GetCompanyInformationSchema.preprocessor
-def preprocess_customer(schema, input_data):
-    return input_data['company']
+    @post_load
+    def preprocess_customer(self, input_data):
+        return input_data['company']

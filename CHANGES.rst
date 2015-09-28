@@ -29,16 +29,18 @@ Here you can see the full list of changes between each Netvisor.py release.
   `<SalesInvoiceAmount>` element had attributes in the XML response.
 - Fixed `netvisor.sales_invoices.get()` crashing when any of the following
   elements were empty in the XML response:
-    - seller identifier
-    - invoicing customer address line
-    - invoicing customer post number
-    - invoicing customer town
-    - delivery address name
-    - delivery address line
-    - delivery address post number
-    - delivery address town
-    - delivery address country code
-    - accounting account suggestion
+
+  - seller identifier
+  - invoicing customer address line
+  - invoicing customer post number
+  - invoicing customer town
+  - delivery address name
+  - delivery address line
+  - delivery address post number
+  - delivery address town
+  - delivery address country code
+  - accounting account suggestion
+
 - Fixed `netvisor.sales_invoices.list()` crashing when customer code was empty
   in the XML response.
 - Fixed `netvisor.sales_invoices.list()` crashing when invoice status had no

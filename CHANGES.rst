@@ -20,14 +20,14 @@ Here you can see the full list of changes between each Netvisor.py release.
 ^^^^^^^^^^^^^^^^^^^^^^
 
 - Fixed too strict validation for payment term fields returned by Netvisor API
-  in `netvisor.sales_invoices.get()`.
+  in ``netvisor.sales_invoices.get()``.
 
 0.3.2 (April 30th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Fixed `netvisor.sales_invoices.get()` crashing when the
-  `<SalesInvoiceAmount>` element had attributes in the XML response.
-- Fixed `netvisor.sales_invoices.get()` crashing when any of the following
+- Fixed ``netvisor.sales_invoices.get()`` crashing when the
+  ``<SalesInvoiceAmount>`` element had attributes in the XML response.
+- Fixed ``netvisor.sales_invoices.get()`` crashing when any of the following
   elements were empty in the XML response:
 
   - seller identifier
@@ -41,15 +41,15 @@ Here you can see the full list of changes between each Netvisor.py release.
   - delivery address country code
   - accounting account suggestion
 
-- Fixed `netvisor.sales_invoices.list()` crashing when customer code was empty
+- Fixed ``netvisor.sales_invoices.list()`` crashing when customer code was empty
   in the XML response.
-- Fixed `netvisor.sales_invoices.list()` crashing when invoice status had no
+- Fixed ``netvisor.sales_invoices.list()`` crashing when invoice status had no
   substatus in the XML response.
 
 0.3.1 (April 29th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Fixed `netvisor.schemas` package missing from the source distribution.
+- Fixed ``netvisor.schemas`` package missing from the source distribution.
 
 0.3.0 (April 29th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -60,7 +60,7 @@ Here you can see the full list of changes between each Netvisor.py release.
   the Python API implementation simpler and more consistent with the Netvisor
   API's XML responses.
 - Changed response parsing to use Marshmallow.
-- Changed `Request` to take `params` as a single keyword argument instead of
+- Changed ``Request`` to take ``params`` as a single keyword argument instead of
   as named variable-length arguments.
 - Fixed tests to work with responses 0.3.0.
 
@@ -69,7 +69,7 @@ Here you can see the full list of changes between each Netvisor.py release.
 
 - Added support for InvoiceNumber and InvoicesAboveNetvisorKey parameters to
   sales invoice listing.
-- Changed xmltodict's dict constructor from `OrderedDict` to to `dict`.
+- Changed xmltodict's dict constructor from ``OrderedDict`` to to ``dict``.
 - Fixed parsing of sales invoice with multiple lines.
 
 0.1.0 (March 26th, 2014)

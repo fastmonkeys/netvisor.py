@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-Here you can see the full list of changes between each Unistorage release.
+Here you can see the full list of changes between each Netvisor.py release.
 
 
 0.4.0 (September 28th, 2015)

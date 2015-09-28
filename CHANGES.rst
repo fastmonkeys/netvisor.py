@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Unistorage release.
 
 
+0.4.0 (September 28th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Updated Marshmallow requirement to >= 2.0.0.
+- Added support for additional address line when creating/updating a customer.
+
 0.3.4 (September 10th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

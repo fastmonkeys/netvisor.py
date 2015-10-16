@@ -284,6 +284,7 @@ class TestSalesInvoiceService(object):
                     },
                     'quantity': decimal.Decimal('2'),
                     'discount_percentage': decimal.Decimal('0'),
+                    'free_text': 'Punainen',
                     'accounting_account_suggestion': '3000'
                 },
                 {
@@ -298,6 +299,7 @@ class TestSalesInvoiceService(object):
                         'code': 'KOMY',
                     },
                     'quantity': decimal.Decimal('1'),
+                    'free_text': 'Keltainen',
                     'accounting_account_suggestion': '3200'
                 }
             ]
@@ -398,6 +400,7 @@ class TestSalesInvoiceService(object):
                     },
                     'quantity': decimal.Decimal('2'),
                     'discount_percentage': decimal.Decimal('0'),
+                    'free_text': 'Punainen',
                     'accounting_account_suggestion': '3000'
                 },
                 {
@@ -412,6 +415,7 @@ class TestSalesInvoiceService(object):
                         'code': 'KOMY',
                     },
                     'quantity': decimal.Decimal('1'),
+                    'free_text': 'Keltainen',
                     'accounting_account_suggestion': '3200'
                 }
             ]

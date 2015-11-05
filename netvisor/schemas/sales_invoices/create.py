@@ -48,6 +48,7 @@ class SalesInvoiceProductLineSchema(RejectUnknownFieldsSchema):
     sales_invoice_product_line_discount_percentage = Decimal(
         attribute='discount_percentage'
     )
+    sales_invoice_product_line_free_text = fields.String(attribute='free_text')
     accounting_account_suggestion = fields.String()
 
     class Meta:

@@ -32,6 +32,7 @@
           <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
           <SalesInvoiceProductLineQuantity>2</SalesInvoiceProductLineQuantity>
           <SalesInvoiceProductLineDiscountPercentage>0</SalesInvoiceProductLineDiscountPercentage>
+          <SalesInvoiceProductLineFreeText>Punainen</SalesInvoiceProductLineFreeText>
           <AccountingAccountSuggestion>3000</AccountingAccountSuggestion>
         </SalesInvoiceProductLine>
       </InvoiceLine>
@@ -42,6 +43,7 @@
           <ProductUnitPrice type="net">100,00</ProductUnitPrice>
           <ProductVatPercentage vatcode="KOMY">22</ProductVatPercentage>
           <SalesInvoiceProductLineQuantity>1</SalesInvoiceProductLineQuantity>
+          <SalesInvoiceProductLineFreeText>Keltainen</SalesInvoiceProductLineFreeText>
           <AccountingAccountSuggestion>3200</AccountingAccountSuggestion>
         </SalesInvoiceProductLine>
       </InvoiceLine>

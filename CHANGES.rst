@@ -4,6 +4,11 @@ Changelog
 Here you can see the full list of changes between each Netvisor.py release.
 
 
+0.5.0 (November 5th, 2015)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Added support for invoice line free text field when creating a sales invoice.
+
 0.4.0 (September 28th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

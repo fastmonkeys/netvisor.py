@@ -4,7 +4,7 @@
     <ProductGroup>Kirjat</ProductGroup>
     <Name>Code Complete</Name>
     <Description>Toinen painos</Description>
-    <UnitPrice Type="brutto">42,5</UnitPrice>
+    <UnitPrice type="brutto">42,5</UnitPrice>
     <Unit>kpl</Unit>
     <UnitWeight>1</UnitWeight>
     <PurchasePrice>25</PurchasePrice>

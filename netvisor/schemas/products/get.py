@@ -13,7 +13,7 @@ from ..fields import Decimal
 
 class UnitPriceSchema(Schema):
     amount = Decimal(load_from='#text')
-    type = fields.String(load_from='@Type')
+    type = fields.String(load_from='@type')
 
 
 class ProductBaseInformationSchema(Schema):

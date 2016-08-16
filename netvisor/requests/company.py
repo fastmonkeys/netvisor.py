@@ -3,7 +3,7 @@
     netvisor.requests.company
     ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: (c) 2013-2015 by Fast Monkeys Oy.
+    :copyright: (c) 2013-2016 by Fast Monkeys Oy.
     :license: MIT, see LICENSE for more details.
 """
 from ..responses.companies import (

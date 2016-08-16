@@ -19,6 +19,7 @@
       <PhoneNumber />
       <FaxNumber />
       <Email />
+      <EmailInvoicingAddress />
       <HomePageUri />
       <IsActive>0</IsActive>
     </CustomerBaseInformation>

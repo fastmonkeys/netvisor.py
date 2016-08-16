@@ -11,7 +11,7 @@
       <ProductGroup></ProductGroup>
       <Name>Code Complete</Name>
       <Description></Description>
-      <UnitPrice Type="brutto">0,0000</UnitPrice>
+      <UnitPrice type="brutto">0,0000</UnitPrice>
       <Unit></Unit>
       <UnitWeight></UnitWeight>
       <PurchasePrice></PurchasePrice>

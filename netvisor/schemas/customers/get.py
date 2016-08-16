@@ -20,6 +20,7 @@ class CustomerBaseInformationSchema(Schema):
     customer_group_netvisor_key = fields.Integer()
     customer_group_name = fields.String()
     email = fields.String(allow_none=True)
+    email_invoicing_address = fields.String(allow_none=True)
     phone_number = fields.String(allow_none=True)
     fax_number = fields.String(allow_none=True)
     home_page_uri = fields.String(allow_none=True)

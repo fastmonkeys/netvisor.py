@@ -19,6 +19,7 @@
       <PhoneNumber>040 12157 988</PhoneNumber>
       <FaxNumber>(015) 123 4567</FaxNumber>
       <Email>maija.mallikas@netvisor.fi</Email>
+      <EmailInvoicingAddress>matti.mallikas@netvisor.fi</EmailInvoicingAddress>
       <HomePageUri>www.netvisor.fi</HomePageUri>
       <IsActive>1</IsActive>
     </CustomerBaseInformation>

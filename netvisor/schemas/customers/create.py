@@ -26,6 +26,7 @@ class CustomerBaseInformationSchema(RejectUnknownFieldsSchema):
     phone_number = fields.String()
     fax_number = fields.String()
     email = fields.String()
+    email_invoicing_address = fields.String()
     home_page_uri = fields.String()
     is_active = Boolean(true='1', false='0')
 

@@ -10,6 +10,7 @@ Here you can see the full list of changes between each Netvisor.py release.
   requires xmltodict >= 0.10.1.
 - Added support for customer's email invoicing address.
 - Fixed case problem with product's unit price type.
+- Added official Python 3.5 support.
 
 0.5.0 (November 5th, 2015)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^

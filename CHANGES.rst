@@ -3,8 +3,8 @@ Changelog
 
 Here you can see the full list of changes between each Netvisor.py release.
 
-0.6.0 (not yet released)
-^^^^^^^^^^^^^^^^^^^^^^^^
+0.6.0 (August 16th, 2016)
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Fixed compatibility with the latest version of xmltodict. Netvisor.py now
   requires xmltodict >= 0.10.1.

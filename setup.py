@@ -34,7 +34,7 @@ setup(
         'inflection',
         'marshmallow>=2.0.0',
         'requests',
-        'xmltodict',
+        'xmltodict>=0.10.1',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

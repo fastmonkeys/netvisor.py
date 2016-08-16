@@ -69,7 +69,7 @@ class TestProductService(object):
                 'name': u'Code Complete',
                 'description': None,
                 'unit_price': {
-                    'amount': decimal.Decimal('0'),
+                    'amount': decimal.Decimal('0.0000'),
                     'type': 'brutto'
                 },
                 'unit': None,
@@ -87,11 +87,11 @@ class TestProductService(object):
                 'default_outside_eu_account_number': u'3380',
             },
             'product_inventory_details': {
-                'inventory_amount': decimal.Decimal('0'),
-                'inventory_mid_price': decimal.Decimal('00'),
-                'inventory_value': decimal.Decimal('0'),
-                'inventory_reserved_amount': decimal.Decimal('0'),
-                'inventory_ordered_amount': decimal.Decimal('0'),
+                'inventory_amount': decimal.Decimal('0.00'),
+                'inventory_mid_price': decimal.Decimal('0.0000'),
+                'inventory_value': decimal.Decimal('0.00'),
+                'inventory_reserved_amount': decimal.Decimal('0.00'),
+                'inventory_ordered_amount': decimal.Decimal('0.00'),
             }
         }
 

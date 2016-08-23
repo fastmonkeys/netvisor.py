@@ -14,9 +14,9 @@
       <PhoneNumber>040 123456</PhoneNumber>
       <FaxNumber>05 123456</FaxNumber>
       <Email>matti.meikalainen@firma.fi</Email>
-      <EmailInvoicingAddress>maija.meikalainen@firma.fi</EmailInvoicingAddress>
       <HomePageUri>www.firma.fi</HomePageUri>
       <IsActive>1</IsActive>
+      <EmailInvoicingAddress>maija.meikalainen@firma.fi</EmailInvoicingAddress>
     </CustomerBaseInformation>
     <CustomerFinvoiceDetails>
       <FinvoiceAddress>FI109700021497</FinvoiceAddress>

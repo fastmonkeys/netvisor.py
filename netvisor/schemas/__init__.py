@@ -1,3 +1,4 @@
+from .accounting import AccountingListSchema  # noqa
 from .companies import CompanyListSchema, GetCompanyInformationSchema  # noqa
 from .customers import (  # noqa
     CreateCustomerSchema,

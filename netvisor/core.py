@@ -8,6 +8,7 @@
 """
 from .auth import NetvisorAuth
 from .client import Client
+from .services.accounting import AccountingService
 from .services.company import CompanyService
 from .services.customer import CustomerService
 from .services.product import ProductService
@@ -30,3 +31,4 @@ class Netvisor(object):
         self.products = ProductService(self._client)
         self.sales_invoices = SalesInvoiceService(self._client)
         self.sales_payments = SalesPaymentService(self._client)
+        self.accounting = AccountingService(self._client)

@@ -3,6 +3,11 @@ Changelog
 
 Here you can see the full list of changes between each Netvisor.py release.
 
+0.7.0 (September 19th, 2016)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Added support for getting accounting data.
+
 0.6.0 (August 16th, 2016)
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
